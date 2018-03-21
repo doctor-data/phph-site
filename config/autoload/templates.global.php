@@ -29,6 +29,7 @@ return [
             'account' => ['templates/app/account'],
             'layout' => ['templates/layout'],
             'error' => ['templates/error'],
+            'partial' => ['templates/partial'],
         ],
     ],
 
@@ -39,11 +40,13 @@ return [
         'factories' => [
             App\View\Helper\IsDebug::class => App\View\Helper\IsDebugFactory::class,
             App\View\Helper\User::class => App\View\Helper\UserFactory::class,
+            App\View\Helper\SpeakerHeadshot::class => App\View\Helper\SpeakerHeadshotFactory::class,
         ],
         'aliases' => [
             'twitterLinkOrName' => App\View\Helper\TwitterLinkOrName::class,
             'isDebug' => App\View\Helper\IsDebug::class,
             'user' => App\View\Helper\User::class,
+            'speakerHeadshot' => App\View\Helper\SpeakerHeadshot::class,
         ],
     ],
 ];
