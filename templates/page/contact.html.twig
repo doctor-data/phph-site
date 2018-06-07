@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+{% block title %}Contact{% endblock %}
+{% block body %}
+    <h1>Contact PHP Hampshire</h1>
+
+    <div class="flex">
+        <div class="f1">
+            <h2>Our meetups</h2>
+            <p>Our meetups happen at the Oasis Centre in Portsmouth which can be found at:</p>
+            <p>1a, Upper Arundel Street,<br> Landport,<br> Portsmouth.<br> PO1 1NP</p>
+            <p>You can also contact us...</p>
+            <ul class="contact-links">
+                <li>on Twitter... <a href="https://twitter.com/phphants">@phphants</a></li>
+                <li>via email... <a href="mailto:info@phphants.co.uk">info@phphants.co.uk</a></li>
+                <li>and on IRC... <a href="{{ url('page', {'slug': 'chat'}) }}">using the IRC webclient</a> or #phph on
+                    freenode.
+                </li>
+            </ul>
+        </div>
+        <div class="f1">
+            <iframe width="100%" height="450" frameborder="0" scrolling="yes" marginheight="0" marginwidth="0"
+                    src="https://www.openstreetmap.org/export/embed.html?bbox=-1.0881507396698%2C50.79873033897874%2C-1.085253953933716%2C50.80025267629846&amp;layer=mapnik&amp;marker=50.799491513837786%2C-1.0867023468017578"
+            ></iframe>
+            <br/>
+            <small><a href="https://www.openstreetmap.org/?mlat=50.79949&amp;mlon=-1.08670#map=19/50.79949/-1.08670">View
+                    Larger Map</a></small>
+        </div>
+    </div>
+{% endblock %}

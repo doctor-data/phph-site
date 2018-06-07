@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+{% block title %}Kiwi IRC Web Client{% endblock %}
+
+{% block body %}
+    <h1>Kiwi IRC Web Client</h1>
+    <p>Need help with IRC? <a href="{{ url('page', {'slug': 'chat-help'}) }}">Find out more...</a></p>
+
+    <iframe src="https://kiwiirc.com/client/irc.freenode.net/?nick=guest|?#phph"
+            style="border:0; width:100%; height:450px;"></iframe>
+{% endblock %}
+
+

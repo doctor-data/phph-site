@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="google-site-verification" content="zCcrDBa7vaY6VybmNJlicAF1M4cD7EAGGiHLWc1zul4"/>
+    <link href='//fonts.googleapis.com/css?family=Open+Sans:400italic,400,700,600,800|Yanone+Kaffeesatz:400,700'
+          rel='stylesheet' type='text/css'>
+    <title>{% block title %}{% endblock %} - PHP Hampshire</title>
+    <link rel="stylesheet" href="{{ asset('build/app.css') }}">
+    {% block stylesheets %}{% endblock %}
+</head>
+<body>
+<div class="gradient-wrapper">
+    {% include 'header.html.twig' %}
+    {% block hero %} {% endblock %}
+</div>
+<div class="wrapper content">
+    {% block body %}{% endblock %}
+</div>
+<div class="wrapper">
+    <a href="mailto:speak@phphants.co.uk" class="announcement">We are looking for speakers for our monthly meetups!
+        To volunteer, <strong>please email us</strong>.</a>
+</div>
+{% include 'footer.html.twig' %}
+{% block javascripts %}
+    <script src="{{ asset('build/app.js') }}" rel="prefetch"></script>
+{% endblock %}
+</body>
+</html>

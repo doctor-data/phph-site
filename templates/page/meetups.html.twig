@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+{% block title %}Meetups{% endblock %}
+{% block body %}
+    <h1>Meetups</h1>
+    {% for flashMessage in app.session.flashbag.get('warning') %}
+        {{ flashMessage }}
+    {% endfor %}
+    {% for talk in talks %}
+        {% if date(talk.meetup.fromDate) > date() and talk.speaker is not null %}
+            <div class="card meet">
+                <div class="image"><img
+                            src="{{ talk.speaker.imagefilename | default("https://images.unsplash.com/photo-1493119508027-2b584f234d6c?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=fb1e9a6cb78d210f74cba5298eca8ee7&auto=format&fit=crop&w=1600&q=80") }}"
+                            alt="Speaker Name"></div>
+                <div class="details">
+                    <div class="top">
+                        <h2 class="title">{{ talk.title }}</h2>
+                        <h3 class="speaker">
+                            <a href="https://www.twitter.com/{{ talk.speaker.twitterhandle }}"
+                               target="_blank">{{ talk.speaker.fullName }}</a>
+                        </h3>
+                        <p class="description">{{ talk.abstract }}</p>
+                        <p>
+                            <small><strong>Starts at {{ talk.time | date('ga \\o\\n  D jS M') }}</strong></small>
+                        </p>
+                    </div>
+                    <div class="bottom">
+                        <a href="#" class="button register orange">Click to attend</a>
+                        <a href="{{ url('page', {'slug': 'contact'}) }}"
+                           class="button red location"></a>
+                    </div>
+                </div>
+            </div>
+        {% endif %}
+    {% endfor %}
+{% endblock %}

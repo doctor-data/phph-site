@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+{% block title %}Videos{% endblock %}
+{% block body %}
+    <h1>Videos</h1>
+    {% for flashMessage in app.session.flashbag.get('warning') %}
+        {{ flashMessage }}
+    {% endfor %}
+    <ul id="videos">
+        {% for talk in talksWithVidoes %}
+            <li>
+                <h3 class="title">
+                    <a href="https://youtu.be/{{ talk.youtubeId }}" target="_blank">{{ talk.title }}</a>
+                </h3>
+                <h4 class="speaker">
+                    <span class="unbold">by</span>
+                    {{ talk.speaker.fullName }}
+                    <span class="unbold">on</span>
+                    {{ talk.time | date('d F Y') }}
+                </h4>
+            </li>
+        {% endfor %}
+    </ul>
+{% endblock %}

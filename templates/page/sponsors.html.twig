@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+{% block title %}Proudly sponsored by&hellip;{% endblock %}
+{% block body %}
+    <h1>Proudly sponsored by&hellip;</h1>
+    <ul class="sponsors">
+        <li class="sponsor">
+            <a href="http://www.spectrumit.co.uk/" class="sponsor-image-link"><img src="{{ asset('build/images/spectrum-it.png') }}"
+                                                        alt="Spectrum IT" class="spons-logo"/></a>
+            <h2>Spectrum IT</h2>
+            <p>Spectrum IT Recruitment is a collaboration of over 10 years recruitment experience, providing recruitment
+                services and consultancy to the IT sector UK wide.</p>
+            <p>Visit: <a href="http://www.spectrumit.co.uk/">www.spectrumit.co.uk</a></p>
+        </li>
+
+        <li class="sponsor">
+            <a href="https://roave.com/" class="sponsor-image-link"><img src="{{ asset('build/images/strawberrysoup.svg') }}" alt="Roave"
+                                              class="spons-logo"/></a>
+            <h2>Strawberrysoup</h2>
+            <p>Strawberrysoup are an award-winning, full-service and results-focused digital agency located in
+                Chichester, London and Bournemouth.</p>
+            <p>Visit: <a href="https://www.strawberrysoup.co.uk/">strawberrysoup.co.uk</a></p>
+        </li>
+
+        <li class="sponsor">
+            <a href="http://www.jetbrains.com/phpstorm/" class="sponsor-image-link"><img src="{{ asset('build/images/jetbrains.svg') }}"
+                                                              alt="JetBrains PhpStorm" class="spons-logo"/></a>
+            <h2>JetBrains PhpStorm</h2>
+            <p>PhpStorm keeps up with latest PHP &amp; web languages trends, integrates a variety of modern tools, and
+                brings even more extensibility with support for major PHP frameworks.</p>
+            <p>Visit: <a href="http://www.jetbrains.com/phpstorm/">www.jetbrains.com/phpstorm</a></p>
+        </li>
+
+        <li class="sponsor">
+            <a href="http://www.oreilly.com/" class="sponsor-image-link"><img src="{{ asset('build/images/oreilly-ug.gif') }}" alt="O'Reilly"
+                                                   class="spons-logo"/></a>
+            <h2>O'Reilly User Group Program</h2>
+            <p>PHP Hampshire is proud to be part of the O'Reilly User Group Program, which means our members can benefit
+                from discounts (40% off printed books, 50% off e-books) and other goodies sometimes.</p>
+            <p>Visit: <a href="http://www.oreilly.com/">www.oreilly.com</a></p>
+        </li>
+    </ul>
+
+{% endblock %}

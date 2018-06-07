@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+{% block title %}Kiwi IRC Web Client Help{% endblock %}
+
+{% block body %}
+    <h1>Kiwi IRC Web Client Help</h1>
+    <p>To log in and start chatting to other PHP Hampshire members, pick a nickname and click on "Start..." on the <a
+                href="{{ url('page', {'slug' : 'chat'}) }}">IRC web client</a>. If you need to know anything else, <a
+                href="{{ url('page', {'slug' : 'contact'}) }}">contact us</a>.</p>
+    <p>You can learn more about IRC, and in particular the Freenode network on the <a
+                href="http://freenode.net/faq.shtml">Freenode frequently asked questions</a> page.</p>
+
+{% endblock %}
