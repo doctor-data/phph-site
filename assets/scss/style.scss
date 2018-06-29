@@ -1,12 +1,3 @@
-/* reset */
-$burnt-sienna: darken(rgb(236, 119, 72), 3%);
-$thunderbird: rgb(204, 61, 33);
-$bay-of-many: rgb(34, 62, 128);
-$mariner: $bay-of-many;
-$salem: #FF990D;
-$fancy-heading: 'Yanone Kaffeesatz', sans-serif;
-$base-font: "Open Sans", sans-serif;
-
 * {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
@@ -36,41 +27,6 @@ body {
   font-family: $base-font;
   background: #eee;
   line-height: 1.6;
-}
-
-@mixin gradient($colour) {
-  background-color: darken($colour, 5%);
-  background-image: -webkit-linear-gradient(top, lighten($colour, 5%), $colour);
-  background-image: -moz-linear-gradient(top, lighten($colour, 5%), $colour);
-  background-image: -ms-linear-gradient(top, lighten($colour, 5%), $colour);
-  background-image: -o-linear-gradient(top, lighten($colour, 5%), $colour);
-  background-image: linear-gradient(to bottom, lighten($colour, 5%), $colour);
-  transition: all 1000ms linear;
-}
-
-.flex {
-  display: flex;
-  @for $i from 1 through 12 {
-    .f#{$i} {
-      flex: #{$i};
-      padding: 1rem;
-      &:first-child {
-        padding-left: 0;
-      }
-      &:last-child {
-        padding-right: 0;
-      }
-    }
-
-  }
-}
-
-.start {
-  align-self: flex-start;
-}
-
-.end {
-  align-self: flex-end;
 }
 
 a {
@@ -113,6 +69,11 @@ sub, sup {
 
 sup {
   top: -.5em;
+}
+
+strong, b {
+  font-weight: normal;
+  font-family: 'Open Sans SemiBold', sans-serif;
 }
 
 @media (max-width: 800px) {
@@ -166,7 +127,6 @@ header nav {
     max-height: 0;
     max-width: 100%;
     width: 100%;
-
     -webkit-transition: max-height .5s ease-in-out;
     transition: max-height .5s ease-in-out;
   }
@@ -360,30 +320,6 @@ header .login-status-text {
   }
 }
 
-.content .sponsors {
-  overflow: hidden; /* clearfix */
-}
-
-.content .sponsor {
-  list-style: none;
-  padding-bottom: 1em;
-  margin-bottom: 1em;
-  border-bottom: 2px solid #ccc;
-}
-
-.content .sponsor:last-child {
-  border: none;
-}
-
-.spons-logo {
-  width: 200px;
-}
-
-.content .sponsor img {
-  float: right;
-  max-width: 50%;
-}
-
 .content h1 {
   margin-bottom: .5em;
 
@@ -398,27 +334,28 @@ header .login-status-text {
   color: #494D57;
 }
 
-.content p {
-  color: #333;
-  padding: .5em 0;
+.content {
+  p {
+    color: #333;
+    padding: .5em 0;
+    a {
+      text-decoration: none;  
+      font-size: inherit;
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+    strong {
+      font-weight: 700;
+      a {
+        color: inherit;
+      }
+    }
+  }
 }
 
-.content p a {
-  text-decoration: none;
-
-  border-bottom: 1px solid;
-}
-
-.content p a:hover {
-  border-color: transparent;
-}
-
-.content p strong {
-  font-weight: 700;
-}
-
-.content p strong a {
-  color: inherit;
+.small {
+  font-size: 0.8rem;
 }
 
 .paypal-donate {
@@ -426,7 +363,8 @@ header .login-status-text {
   padding: 0;
   margin: 0;
   input[type=image] {
-    width: 40%;
+    width: 200px;
+    height: 76px;
   }
 }
 
@@ -589,19 +527,6 @@ ul#videos .video {
   }
 }
 
-ul#team li {
-  overflow: hidden; /* clearfix */
-  padding-bottom: 20px;
-  list-style-type: none;
-}
-
-ul#team li img {
-  width: 220px;
-  height: 200px;
-  float: left;
-  padding-right: 20px;
-}
-
 .error {
   color: #ff0000;
 }
@@ -645,23 +570,62 @@ $buttonText: #fff;
   content: '\2713';
 }
 
-ul.login-with {
-  li {
-    margin-bottom: 5px;
-    width: 300px;
-  }
-}
-
 .card {
-  max-height: 60vh;
+  box-shadow: 0 -1px 10px rgba(0, 0, 0, .2);
+  display: flex;
+  background: #ffffff;
+  flex-direction: column;
+  justify-content: space-evenly;
+  @media (max-width: 600px) {
+    display: block;
+    width: 100%;
+  }
+  &.sponsor, &.team {
+    padding: 1rem;
+    margin: 0.5rem;
+    &:first-of-type {
+      margin-left: 0;
+    }
+    &:last-of-type {
+      margin-right: 0;
+      @media (max-width: 425px) {
+        margin: unset;
+      }
+    }
+    h2 {
+      font-family: $fancy-heading;
+      align-self: flex-end;
+      flex: 1;
+    }
+    p {
+      font-size: 0.8rem;
+      align-self: flex-end;
+      flex: 1;
+    }
+    img {
+      width: 100%;
+      height: auto;
+      max-width: 100%;
+      max-height: 140px;
+      padding: 1rem;
+    }
+  }
+  &.team {
+    display: block;
+    img {
+      width: 100%;
+      height: auto;
+      max-width: 100%;
+      max-height: unset;
+      padding: 0 0 1rem 0;
+    }
+  }
   &.meet {
-    background: #ffffff;
-    display: flex;
-    box-shadow: 0 -1px 10px rgba(0, 0, 0, .2);
     justify-content: space-between;
     width: 100%;
     overflow: hidden;
     margin: 1rem auto auto;
+    flex-direction: row;
     .image {
       flex: 2;
       overflow: hidden;
@@ -669,7 +633,7 @@ ul.login-with {
       img {
         transform: translateX(-50%);
         margin-left: 50%;
-        max-height: 100%;
+        max-height: 520px;
         width: auto;
       }
     }
@@ -722,45 +686,5 @@ ul.login-with {
 }
 
 .button {
-  display: block;
-  padding: .75em .5em;
-  font-size: 1.5rem;
-  text-decoration: none;
-  color: #fff;
-  box-shadow: 0 3px 0 rgba(0, 0, 0, 0.15);
-  @include gradient(#ddd);
-  -webkit-transition: all .05s;
-  transition: all .05s;
-  text-align: center;
-  &.small {
-    padding: .35em .5em;
-    font-size: 0.85rem;
-    box-shadow: none;
-    text-transform: uppercase;
-
-  }
-  &.orange {
-    @include gradient($burnt-sienna);
-    &:hover {
-      @include gradient(darken($burnt-sienna, 5%));
-    }
-  }
-  &.blue {
-    @include gradient($mariner);
-    &:hover {
-      @include gradient(darken($mariner, 5%));
-    }
-  }
-  &.red {
-    @include gradient($thunderbird);
-    &:hover {
-      @include gradient(darken($thunderbird, 5%));
-    }
-  }
-  &.green {
-    @include gradient($salem);
-    &:hover {
-      @include gradient(darken($salem, 5%));
-    }
-  }
+  @include button();
 }

@@ -1,0 +1,47 @@
+{% extends 'base.html.twig' %}
+{% block title %}Register for our meetup{% endblock %}
+{% block body %}
+    {% for flashMessage in app.session.flashbag.get('warning') %}
+        {{ flashMessage }}
+    {% endfor %}
+    <div class="flex top-margin-3">
+        <div class="f1"></div>
+        <div class="card f6">
+            {{ form_start(form) }}
+            <h1>Register for our meetup</h1>
+            {{ form_errors(form) }}
+
+            <div>
+                {{ form_label(form.name) }}
+                {{ form_errors(form.name) }}
+                {{ form_widget(form.name) }}
+            </div>
+
+            <div>
+                {{ form_label(form.contact_info) }}
+                {{ form_errors(form.contact_info) }}
+                {{ form_widget(form.contact_info) }}
+            </div>
+
+            <div class="checkbox-container">
+                {{ form_errors(form.consent) }}
+                {{ form_widget(form.consent) }}
+                {{ form_label(form.consent, null, {'label_attr': {'class': 'small'}}) }}
+            </div>
+
+            <p class="small"> This information will be stored in a database for up to 60 days. This information
+                is only used to predict attendance numbers ( for pizza and beer purchases ) and to contact raffle
+                winners. PHP Hampshire will never contact you without your consent using the information you
+                provide.
+                <br><br>
+                If you wish to have your information removed, please contact <a href="mailto:info@phphants.co.uk">info@phphants.co.uk</a>
+                and we will do our best to comply with your request in a timely manner.</p>
+
+            <div>
+                {{ form_widget(form.submit) }}
+            </div>
+            {{ form_end(form) }}
+        </div>
+        <div class="f1"></div>
+    </div>
+{% endblock %}

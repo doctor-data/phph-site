@@ -1,3 +1,11 @@
+/* reset */
+$burnt-sienna: darken(rgb(236, 119, 72), 3%);
+$thunderbird: rgb(204, 61, 33);
+$bay-of-many: rgb(34, 62, 128);
+$mariner: $bay-of-many;
+$salem: #FF990D;
+
 @import "fonts";
 @import "helpers";
+@import "forms";
 @import "style";

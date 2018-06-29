@@ -1,6 +1,86 @@
+@mixin gradient($colour) {
+  background-color: darken($colour, 5%);
+  background-image: -webkit-linear-gradient(top, lighten($colour, 5%), $colour);
+  background-image: -moz-linear-gradient(top, lighten($colour, 5%), $colour);
+  background-image: -ms-linear-gradient(top, lighten($colour, 5%), $colour);
+  background-image: -o-linear-gradient(top, lighten($colour, 5%), $colour);
+  background-image: linear-gradient(to bottom, lighten($colour, 5%), $colour);
+  transition: all 1000ms linear;
+}
+
+@mixin button() {
+  display: block;
+  padding: .75em .5em;
+  font-size: 1.5rem;
+  text-decoration: none;
+  color: #fff;
+  box-shadow: 0 3px 0 rgba(0, 0, 0, 0.15);
+  -webkit-transition: all .05s;
+  transition: all .05s;
+  text-align: center;
+  text-transform: uppercase;
+  &.small {
+    padding: .35em .5em;
+    font-size: 0.85rem;
+    box-shadow: none;
+    text-transform: uppercase;
+  }
+  @include gradient($burnt-sienna);
+  &:hover {
+    @include gradient(darken($burnt-sienna, 5%));
+  }
+  &.blue {
+    @include gradient($mariner);
+    &:hover {
+      @include gradient(darken($mariner, 5%));
+    }
+  }
+  &.red {
+    @include gradient($thunderbird);
+    &:hover {
+      @include gradient(darken($thunderbird, 5%));
+    }
+  }
+  &.green {
+    @include gradient($salem);
+    &:hover {
+      @include gradient(darken($salem, 5%));
+    }
+  }
+}
+
 .pull-right {
   float: right;
 }
+
 .pull-left {
   float: left;
+}
+
+.flex {
+  display: flex;
+  flex-direction: row;
+  @for $i from 1 through 12 {
+    .f#{$i} {
+      flex: #{$i};
+      padding: 1rem;
+    }
+  }
+  @media (max-width: 425px) {
+    flex-direction: column;
+  }
+}
+
+.start {
+  align-self: flex-start;
+}
+
+.end {
+  align-self: flex-end;
+}
+
+@for $i from 1 through 4 {
+  .top-margin-#{$i} {
+    margin-top: #{$i}rem;
+  }
 }

@@ -1,3 +1,6 @@
-controllers:
-    resource: ../../src/Controller/
+Registrations:
+    resource: ../../src/Controller/RegistrationController.php
+    type: annotation
+Pages:
+    resource: ../../src/Controller/PageController.php
     type: annotation

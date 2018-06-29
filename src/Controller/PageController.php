@@ -78,7 +78,7 @@ class PageController extends Controller
      * @return Response
      * @throws NotFoundHttpException
      */
-    public function default($slug = '/')
+    public function default($slug = '/'): ?Response
     {
         try {
             $slug = $slug === '/' ? 'index' : $slug;

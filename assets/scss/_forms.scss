@@ -1,0 +1,52 @@
+form {
+  padding: 2rem 5rem;
+  * {
+    font-family: $base-font;
+    font-size: 0.9rem;
+  }
+  //div {
+  width: 100%;
+  div {
+    display: flex;
+    flex-direction: column;
+    &.row {
+      flex-direction: row;
+    }
+    margin: 0.56rem 0;
+    label {
+      flex: 1;
+      padding-bottom: 0.3rem;
+      text-transform: uppercase;
+      color: #999999;
+      margin-top: 0.1rem;
+    }
+    input {
+      font-size: 1.2rem;
+      flex: 1;
+      padding: 0.7rem 1rem;
+      border: 1px transparent solid;
+      background: rgba(0, 0, 0, 0.07);
+      margin-bottom: 0.5rem;
+      & + input[type=checkbox] {
+        flex: none;
+      }
+    }
+    button, input[type=submit] {
+      border: none;
+      @include button();
+      box-shadow: 0 2px 3px rgba(0, 0, 0, 0.15);
+      font-size: 1rem;
+      margin-top: 0.8rem;
+    }
+    &.checkbox-container {
+      display: block;
+      label {
+        text-transform: none;
+      }
+      input[type=checkbox] {
+        margin-right: 0.5rem;
+      }
+    }
+  }
+  //}
+}
