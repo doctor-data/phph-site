@@ -1,12 +1,13 @@
 {% extends 'base.html.twig' %}
 {% block title %}Meetups{% endblock %}
+{% set single = null %}
 {% block body %}
-    <h1>Meetups</h1>
+    <h1>Our next meet</h1>
     {% for flashMessage in app.session.flashbag.get('warning') %}
         {{ flashMessage }}
     {% endfor %}
     {% for talk in talks %}
-        {% if date(talk.meetup.fromDate) > date() and talk.speaker is not null %}
+        {% if date(talk.meetup.fromDate) > date() and talk.speaker is not null and single is null %}
             <div class="card meet">
                 <div class="image"><img
                             src="{{ asset('build/images/meet-holding.jpeg') }}"
@@ -20,16 +21,19 @@
                         </h3>
                         <p class="description">{{ talk.abstract }}</p>
                         <p>
-                            <small><strong>Event starts at {{ talk.time | date('ga \\o\\n  D jS M') }}, talk begins 30 minutes later</strong></small>
+                            <small><strong>Event starts at {{ talk.time | date('ga \\o\\n  D jS M') }}, talk begins 30
+                                    minutes later</strong></small>
                         </p>
                     </div>
                     <div class="bottom">
-                        <a href="{{ url('registration') }}" class="button register orange">Click to attend</a>
+                        <a href="{{ url('registration', {'id' : talk.id }) }}" class="button register orange">Click to
+                            attend</a>
                         <a href="{{ url('page', {'slug': 'contact'}) }}"
                            class="button red location"></a>
                     </div>
                 </div>
             </div>
+            {% set single = true %}
         {% endif %}
     {% endfor %}
 {% endblock %}
