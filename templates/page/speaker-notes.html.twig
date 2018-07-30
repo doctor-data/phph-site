@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+{% block title %}Speaker notes{% endblock %}
+{% block body %}
+    <h1>Speaker notes</h1>
+    <ul>
+        <li><strong>Slide format:</strong> 4x3.</li>
+        <li><strong>Video input</strong>: VGA only, please bring appropriate adapters.</li>
+        <li><strong>Audio input</strong>: 3.5mm jack, if required.</li>
+        <li><strong>Mic</strong>: Headset radio mic (provided by us).</li>
+        <li><strong>Internet</strong>: WiFi is available, and is moderate in speed.</li>
+        <li><strong>Layout</strong>: You will be on a stage with projection above/behind you. We advise you do not rely on being able to see the projection, as it is directly above you on the stage. You will have a lectern with the connections for your laptop.</li>
+        <li><strong>Laptop</strong>: You are recommended to bring your own laptop (with appropriate adapters) but if you are unable to, please inform us well in advance and we will try to accommodate you.</li>
+        <li>Note the contrast is not great on the projector, so we suggest dark-on-light slides with high contrasting colours for best visibility</li>
+        <li><strong>Arrive</strong>: around ​19:00​ please. An organiser (probably Lee) will be at the venue from around ​18:30, so turning up a little early is fine.</li>
+        <li><strong>Talk begins</strong>: ​19:30</li>
+        <li><strong>Talk length</strong>: approximately 1 hour, including Q&A</li>
+        <li>We sometimes like to film our talks - if you are not happy to be filmed, please inform an organiser. Once the video is uploaded to YouTube, we will publish the video on <a href="{{ url('page', {'slug' : 'videos'}) }}">http://phphants.co.uk/videos</a></li>
+        <li><strong>Post-talk social</strong>: begins ​21:00 at the Brewhouse and Kitchen (see: <a href="http://www.brewhouseandkitchen.com/venue/portsmouth/">http://www.brewhouseandkitchen.com/venue/portsmouth/</a> for menu, food served until ​22:00)</li>
+        <li><strong>Food</strong>: Some pizza is provided, but sometimes limited supplies. You can also order food at the pub afterwards until ​22:00</li>
+        <li><strong>Drink</strong>: Tea, Coffee & water available free at the meetup. Some beer is also provided, but sometimes in limited quantity.</li>
+        <li>Code of Conduct must be followed at all times: <a href="http://phphants.co.uk/code-of-conduct">http://phphants.co.uk/code-of-conduct</a></li>
+        <li><strong>Location</strong>: “Oasis the Venue” (Elim Church) on Arundel Street in the city centre of Portsmouth. Please note there is a nearby “Oasis Conference Suite” located in QA hospital - please do NOT go there as you’ll be in the wrong place. <a href="https://www.google.com/maps/d/edit?mid=zyLs0T-tMxb4.kjWGgvxgiqaA"><strong>Points of interest</strong></a></li>
+        <li><strong>Nearest train station</strong>: Portsmouth & Southsea - it is a few minutes walk from both the talk venue, and the social venue.</li>
+        <li><strong>Our organisers</strong>: <a href="{{ url('page', {'slug' : 'team'}) }}">http://phphants.co.uk/team</a>. If you need to contact us for any reason, please email <a href="mailto:info@phphants.co.uk">info@phphants.co.uk</a></li>
+    </ul>
+    <br>
+    <h3>Above all - this is an informal meetup, please have fun and be awesome!</h3>
+    
+{% endblock %}

@@ -49,6 +49,21 @@
   }
 }
 
+* {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  background-size: contain;
+}
+
+::after, ::before {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
 .pull-right {
   float: right;
 }
@@ -64,9 +79,13 @@
     .f#{$i} {
       flex: #{$i};
       padding: 1rem;
+      @media (max-width: 800px) {
+        flex-basis: 50%;
+        width: 50%;
+      }
     }
   }
-  @media (max-width: 425px) {
+  @media (max-width: 768px) {
     flex-direction: column;
   }
 }

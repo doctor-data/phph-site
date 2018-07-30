@@ -1,28 +1,6 @@
 <header>
     <div class="wrapper">
         <a href="{{ url('page', {'slug': 'index'}) }}" class="header-logo"><h1>PHP Hampshire</h1></a>
-        <a class="nav-button" href="#">Menu</a>
-        <nav>
-            <ul class="navigation">
-                <li>
-                    <a href="{{ url('page') }}">Home</a>
-                </li>
-                <li>
-                    <a href="{{ url('page', {'slug': 'meetups'}) }}">Meetups</a>
-                </li>
-                <li>
-                    <a href="{{ url('page', {'slug': 'videos'}) }}">Videos</a>
-                </li>
-                <li>
-                    <a href="{{ url('page', {'slug': 'sponsors'}) }}">Sponsors</a>
-                </li>
-                <li>
-                    <a href="{{ url('page', {'slug': 'team'}) }}">Team</a>
-                </li>
-                <li>
-                    <a href="{{ url('page', {'slug': 'contact'}) }}">Contact</a>
-                </li>
-            </ul>
-        </nav>
+        <a id="nav-button" class="nav-button" href="">Menu</a>
     </div>
 </header>

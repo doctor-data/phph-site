@@ -1,4 +1,5 @@
 require('../scss/app.scss');
+require('./menu.js');
 /** this is a sucky way of managing images **/
 require('../images/paypal-donate.png');
 require('../images/team/jez.jpg');
