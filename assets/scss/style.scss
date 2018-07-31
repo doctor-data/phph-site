@@ -47,14 +47,20 @@ h1 {
   font-size: 2rem;
 }
 
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   font-family: inherit;
   font-weight: 500;
   line-height: 1.6;
   color: inherit;
 }
 
-sub, sup {
+sub,
+sup {
   position: relative;
   font-size: 75%;
   line-height: 0;
@@ -65,14 +71,16 @@ sup {
   top: -.5em;
 }
 
-strong, b {
+strong,
+b {
   font-weight: normal;
   font-family: 'Open Sans SemiBold', sans-serif;
 }
 
 header {
   padding: 15px 10px;
-  overflow: auto; /* clearfix */
+  overflow: auto;
+  /* clearfix */
   color: #fff;
 }
 
@@ -81,7 +89,8 @@ header {
   float: left;
   width: 140px;
   height: 70px;
-  text-indent: -9999px; /* hides the text */
+  text-indent: -9999px;
+  /* hides the text */
   background: url('../images/phph-logo-white.svg') no-repeat center;
   background-size: contain;
   @media (max-width: 768px) {
@@ -132,7 +141,6 @@ header .login-status-text {
   margin: 0 auto;
   padding: 1em;
   line-height: 1.25;
-
   font-size: 1.5em;
   color: #ededf5;
   text-shadow: 0 2px 0 rgba(0, 0, 0, .15);
@@ -149,16 +157,12 @@ header .login-status-text {
   width: 60%;
   margin: 0 auto;
   padding: .75em .5em;
-
   font-size: 1.5em;
   text-decoration: none;
   color: #fff;
-
   @include gradient($burnt-sienna);
-
   border-radius: 5px;
   box-shadow: 0 3px 0 rgba(0, 0, 0, .15);
-
   -webkit-transition: all .05s;
   transition: all .05s;
 }
@@ -175,17 +179,16 @@ header .login-status-text {
 
 .hero .register-button:hover {
   box-shadow: none;
-
   -webkit-transform: translateY(3px);
   transform: translateY(3px);
-
   cursor: pointer;
 }
 
 .content {
   flex: 1 0 auto;
   padding: 1em .5em;
-  overflow: hidden; /* acts as a clearfix */
+  overflow: hidden;
+  /* acts as a clearfix */
 }
 
 .content section {
@@ -206,7 +209,6 @@ header .login-status-text {
     font-size: 1.5em;
     color: #2C3C61;
   }
-
   h2 {
     margin-bottom: .5em;
     font-size: 1.25em;
@@ -231,6 +233,9 @@ header .login-status-text {
   }
   ul {
     padding-left: 2rem;
+    @media (max-width: 600px) {
+      padding-left: 1rem;
+    }
     li {
       //list-style-position: inside;
       padding-right: 1rem;
@@ -258,19 +263,16 @@ header .login-status-text {
   padding: .5em;
   width: 50%;
   margin: 20px auto;
-
   font-size: 1.15em;
   color: #3F3F3F;
   text-align: center;
   text-decoration: none;
-
   background: #B3B3B3;
   background-image: -webkit-linear-gradient(top, #CFCFCF, #B3B3B3);
   background-image: -moz-linear-gradient(top, #CFCFCF, #B3B3B3);
   background-image: -ms-linear-gradient(top, #CFCFCF, #B3B3B3);
   background-image: -o-linear-gradient(top, #CFCFCF, #B3B3B3);
   background-image: linear-gradient(to bottom, #CFCFCF, #B3B3B3);
-
   border-radius: 10px;
   border-bottom-left-radius: 0;
 }
@@ -285,7 +287,6 @@ header .login-status-text {
   left: -20px;
   bottom: 0;
   display: block;
-
   border: 10px solid #B3B3B3;
   border-top-color: transparent;
   border-left-color: transparent;
@@ -305,10 +306,8 @@ header .login-status-text {
 p.talk-abstract {
   margin: .75em;
   padding: 0 1em;
-
   font-style: italic;
   font-size: .9em;
-
   border-left: 2px solid #ccc;
 }
 
@@ -319,7 +318,6 @@ p.talk-abstract {
 footer {
   width: 100%;
   padding: 1em;
-
   background-color: #2E2E2E;
   color: #f5f5f5;
   text-align: center;
@@ -373,10 +371,8 @@ footer ul.links.flex {
 footer .links li a {
   display: block;
   padding: .25em;
-
   color: inherit;
   text-decoration: none;
-
   -webkit-transition: color .05s;
   transition: color .05s;
 }
@@ -424,8 +420,12 @@ ul#videos .video {
 $buttonBgNotThere: #afafaf;
 $buttonBgAttending: #81bf16;
 $buttonText: #fff;
-.attending-button, .attending-button.is-attending {
-  &:focus, &:visited, &:hover, &:active {
+.attending-button,
+.attending-button.is-attending {
+  &:focus,
+  &:visited,
+  &:hover,
+  &:active {
     text-decoration: none;
   }
 }

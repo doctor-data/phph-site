@@ -49,6 +49,7 @@
   overflow: hidden;
   pointer-events: none;
   z-index: 150;
+  font-size: calc(100vh * 0.03);
 }
 
 .menu--visible {
@@ -58,7 +59,7 @@
 .app-menu {
   background-color: $mariner;
   position: relative;
-  width: 100%;
+  width: 80%;
   height: 100%;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.5);
   -webkit-transform: translateX(-100%);
@@ -119,10 +120,11 @@
   opacity: 0;
   will-change: opacity;
   pointer-events: none;
-  transition: opacity 0.3s cubic-bezier(0, 0, 0.3, 1);
+  transition: opacity 0.3s linear;
 }
 
 .menu--visible.menu:after {
   opacity: 1;
   pointer-events: auto;
+  transition: opacity 0.3s linear;
 }

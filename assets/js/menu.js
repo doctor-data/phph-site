@@ -6,8 +6,10 @@ document.addEventListener("DOMContentLoaded", function () {
         myMenu.classList.add("menu--animatable");
         if (!myMenu.classList.contains("menu--visible")) {
             myMenu.classList.add("menu--visible");
+            body.classList.add("nav--active");
         } else {
             myMenu.classList.remove('menu--visible');
+            body.classList.remove("nav--active");
         }
     }
 
@@ -17,6 +19,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     var myMenu = document.querySelector(".menu");
     var oppMenu = document.querySelector(".nav-button");
+    var body = document.querySelector("body");
     myMenu.addEventListener("transitionend", OnTransitionEnd, false);
     oppMenu.addEventListener("click", toggleClassMenu, false);
     myMenu.addEventListener("click", toggleClassMenu, false);

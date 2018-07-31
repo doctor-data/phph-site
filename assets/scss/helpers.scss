@@ -58,7 +58,8 @@
   background-size: contain;
 }
 
-::after, ::before {
+::after,
+::before {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
@@ -83,6 +84,11 @@
         flex-basis: 50%;
         width: 50%;
       }
+      @media (max-width: 768px) {
+        flex-basis: 96%;
+        width: 96%;
+        margin: auto
+      }
     }
   }
   @media (max-width: 768px) {
@@ -100,6 +106,9 @@
 
 @for $i from 1 through 4 {
   .top-margin-#{$i} {
-    margin-top: #{$i}rem;
+    margin-top: #{$i}em;
+    @media (max-width: 800px) {
+      margin-top: calc(#{$i}em / 5);
+    }
   }
 }
