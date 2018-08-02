@@ -1,19 +1,18 @@
 .nav-button {
-  float: right;
+  flex: 1;
+  justify-self: flex-end;
   color: white;
-  line-height: 62px;
   width: 5em;
+  font-size: 1.5em;
+  text-align: right;
   &:before {
     content: ' ';
-    width: 20px;
-    background: url('../images/menu.svg');
+    width: 1.2vw;
     background-size: contain;
     display: block;
-    transform: translateX(-50%);
-    height: 61px;
-    background-repeat: no-repeat;
+    height: 1.2vw;
     float: left;
-    background-position: center;
+    background: url('../images/menu.svg') no-repeat right;
   }
 }
 
