@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", function () {
     function toggleClassMenu(e) {
-        if (e.srcElement.id === 'nav-button') {
+        if (e.target.id === 'nav-button') {
             e.preventDefault();
         }
         myMenu.classList.add("menu--animatable");

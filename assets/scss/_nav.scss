@@ -78,11 +78,11 @@
     align-items: center;
     display: flex;
     will-change: background;
-    transition: background-color 333ms ease-in-out;
+    transition: background-color 333ms linear;
     background-color: rgba(255,255,255,0);
     &:hover {
       background-color: rgba(255,255,255,0.1);
-      transition: background-color 333ms ease-in-out;
+      transition: background-color 333ms linear;
     }
     a {
       color: white;
@@ -96,16 +96,17 @@
 }
 
 .menu--visible .app-menu {
-  -webkit-transform: none;
-  transform: none;
+  -webkit-transform: translateX(0);
+  transform: translateX(0);
+  will-change: transform;
 }
 
 .menu--animatable .app-menu {
-  transition: all 230ms ease-in;
+  transition: transform 333ms linear;
 }
 
 .menu--visible.menu--animatable .app-menu {
-  transition: all 330ms ease-out;
+  transition: transform 333ms linear;
 }
 
 .menu:after {
@@ -120,11 +121,11 @@
   opacity: 0;
   will-change: opacity;
   pointer-events: none;
-  transition: opacity 0.3s linear;
+  transition: opacity 333ms linear;
 }
 
 .menu--visible.menu:after {
   opacity: 1;
   pointer-events: auto;
-  transition: opacity 0.3s linear;
+  transition: opacity 333ms linear;
 }

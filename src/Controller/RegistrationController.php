@@ -63,7 +63,7 @@ class RegistrationController extends Controller
 
 
         if ($response['consent'] !== '1') {
-            $session->getFlashBag()->add(
+            $session->getFlashBag()->set(
                 'error',
                 'Sorry you did not seem to provide consent, please try again!'
             );
@@ -72,12 +72,10 @@ class RegistrationController extends Controller
         }
 
         if ( ! $this->registerMember($response['name'], $response['contact_info'])) {
-            $session->getFlashBag()->add(
-                'error',
-                'Sorry there was a problem with your registration, please try again!'
-            );
+            return $this->render('registration/index.html.twig', []);
         }
-        $session->getFlashBag()->add('info', 'Thanks for your registration, we look forward to seeing you!');
+
+        $session->getFlashBag()->set('info', 'Thanks for your registration, we look forward to seeing you!');
 
         return $this->render('registration/index.html.twig', []);
     }
@@ -101,8 +99,9 @@ class RegistrationController extends Controller
         } catch (\Exception $e) {
             if ($e->getCode() === 0) {
                 $session = $this->get('session');
-                $session->getFlashBag()->add('info', 'Looks like you have already registered, thanks!');
+                $session->getFlashBag()->set('info', 'Looks like you have already registered, thanks!');
             }
+
             return false;
         }
 
