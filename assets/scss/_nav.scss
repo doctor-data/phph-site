@@ -5,13 +5,13 @@
   width: 5em;
   font-size: 1.5em;
   text-align: right;
+  display: flex;
   &:before {
     content: ' ';
-    width: 1.2vw;
+    width: 25px;
     background-size: contain;
     display: block;
-    height: 1.2vw;
-    float: left;
+    margin-right: 6px;
     background: url('../images/menu.svg') no-repeat right;
   }
 }
@@ -30,8 +30,9 @@
     height: 3em;
     z-index: 151;
     line-height: 3em;
+    font-size: 1em;
     &:before {
-      height: 3.1em;
+      background-size: 1.3em;
     }
   }
   .app-menu {

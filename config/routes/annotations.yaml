@@ -1,3 +1,6 @@
+Auth:
+    resource: ../../src/Controller/AuthController.php
+    type: annotation
 Admin:
     resource: ../../src/Controller/AdminController.php
     type: annotation

@@ -41,10 +41,13 @@ class AdminController extends Controller
 
     /**
      * @Route("/admin/meets/", name="meet_management")
+     * @Template("admin/index.html.twig")
      * @Method("GET")
      */
     public function meetIndex()
     {
-        return [];
+        return [
+            'title' => 'Meetups',
+        ];
     }
 }
