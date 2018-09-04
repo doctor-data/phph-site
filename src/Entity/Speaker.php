@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Speaker
  *
- * @ORM\Table(name="speaker")
+ * @ORM\Table(name="speakers")
  * @ORM\Entity
  */
 class Speaker
@@ -17,7 +17,7 @@ class Speaker
      *
      * @ORM\Column(name="id", type="guid", nullable=false)
      * @ORM\Id
-     * @ORM\GeneratedValue(strategy="SEQUENCE")
+     * @ORM\GeneratedValue(strategy="UUID")
      * @ORM\SequenceGenerator(sequenceName="speaker_id_seq", allocationSize=1, initialValue=1)
      */
     private $id;

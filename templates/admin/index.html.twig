@@ -1,22 +1,5 @@
-{% extends 'base.html.twig' %}
+{% extends 'admin/base.html.twig' %}
 {% block title %}Admin{% endblock %}
 {% block body %}
-    <div class="card meet f3">
-        <div class="details">
-            <div class="top">
-                <h2 class="title">{{ title | default('Dashboard') }}</h2>
-                <ul>
-                    {% for member in members|default %}
-                        <li>{{ member.displayName }} &lt;{{ member.contact }}&gt;</li>
-                    {% endfor %}
-                </ul>
-
-                <a href="" class="button">Select winners</a>
-            </div>
-        </div>
-    </div>
-    <div class="card meet f1">
-        <a class="button" href="{{ url('member') }}">Members</a>
-        <a class="button" href="{{ url('meet_management') }}">Meets</a>
-    </div>
+    {{ parent() }}
 {% endblock %}

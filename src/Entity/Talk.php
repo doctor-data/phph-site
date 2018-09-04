@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Talk
  *
- * @ORM\Table(name="talk", indexes={@ORM\Index(name="idx_9f24d5bbd04a0f27", columns={"speaker_id"}), @ORM\Index(name="idx_9f24d5bb591e2316", columns={"meetup_id"})})
+ * @ORM\Table(name="talks", indexes={@ORM\Index(name="speaker_index", columns={"speaker_id"}), @ORM\Index(name="event_index", columns={"event_id"})})
  * @ORM\Entity(repositoryClass="App\Repository\TalkRepository")
  */
 class Talk
@@ -17,7 +17,7 @@ class Talk
      *
      * @ORM\Column(name="id", type="guid", nullable=false)
      * @ORM\Id
-     * @ORM\GeneratedValue(strategy="SEQUENCE")
+     * @ORM\GeneratedValue(strategy="UUID")
      * @ORM\SequenceGenerator(sequenceName="talk_id_seq", allocationSize=1, initialValue=1)
      */
     private $id;
@@ -51,14 +51,14 @@ class Talk
     private $youtubeId;
 
     /**
-     * @var Meetup
+     * @var Event
      *
-     * @ORM\ManyToOne(targetEntity="Meetup")
+     * @ORM\ManyToOne(targetEntity="Event")
      * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="meetup_id", referencedColumnName="id")
+     *   @ORM\JoinColumn(name="event_id", referencedColumnName="id")
      * })
      */
-    private $meetup;
+    private $event;
 
     /**
      * @var Speaker
@@ -123,14 +123,14 @@ class Talk
         return $this;
     }
 
-    public function getMeetup(): ?Meetup
+    public function getevent(): ?event
     {
-        return $this->meetup;
+        return $this->event;
     }
 
-    public function setMeetup(?Meetup $meetup): self
+    public function setevent(?event $event): self
     {
-        $this->meetup = $meetup;
+        $this->event = $event;
 
         return $this;
     }

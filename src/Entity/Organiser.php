@@ -7,18 +7,18 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * User
  *
- * @ORM\Table(name="user", uniqueConstraints={@ORM\UniqueConstraint(name="uniq_8d93d649e7917c74", columns={"email"})})
+ * @ORM\Table(name="organisers", uniqueConstraints={@ORM\UniqueConstraint(name="email_index", columns={"email"})})
  * @ORM\Entity
  */
-class User
+class Organiser
 {
     /**
      * @var string
      *
      * @ORM\Column(name="id", type="guid", nullable=false)
      * @ORM\Id
-     * @ORM\GeneratedValue(strategy="SEQUENCE")
-     * @ORM\SequenceGenerator(sequenceName="user_id_seq", allocationSize=1, initialValue=1)
+     * @ORM\GeneratedValue(strategy="UUID")
+     * @ORM\SequenceGenerator(sequenceName="organiser_id_seq")
      */
     private $id;
 

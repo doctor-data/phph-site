@@ -1,0 +1,17 @@
+{% extends 'admin/base.html.twig' %}
+{% block title %}Members{% endblock %}
+{% block body %}
+    <div class="card meet f3">
+        <div class="details">
+            <div class="top">
+                <h2 class="title">{{ title | default('Dashboard') }}</h2>
+                <ul>
+                    {% for member in members|default %}
+                        <li>{{ member.displayName }} &lt;{{ member.contact }}&gt;</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </div>
+    {{ parent() }}
+{% endblock %}

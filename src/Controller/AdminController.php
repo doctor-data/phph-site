@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Organiser;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -26,28 +27,86 @@ class AdminController extends Controller
 
     /**
      * @Route("/admin/member/", name="member")
-     * @Template("admin/index.html.twig")
      * @Method("GET")
      */
     public function memberIndex()
     {
-        $members = $this->getDoctrine()->getRepository('App:Member');
+        try {
+            $members = $this->getDoctrine()->getRepository('App:Member')->findAll();
+        } catch (\Exception $e) {
+            $this->generateStorageFault();
+        }
 
         return [
-            'title' => 'Members',
-            'members' => $members->findAll(),
+            'title'   => 'Members',
+            'members' => isset($members) ? $members : null,
         ];
     }
 
     /**
-     * @Route("/admin/meets/", name="meet_management")
-     * @Template("admin/index.html.twig")
+     * @Route("/admin/events/", name="event_management")
      * @Method("GET")
      */
-    public function meetIndex()
+    public function eventIndex(): array
     {
+        try {
+            $events = $this->getDoctrine()->getRepository('App:Event')->findAll();
+        } catch (\Exception $e) {
+            $this->generateStorageFault();
+        }
+
         return [
-            'title' => 'Meetups',
+            'title'  => 'Events',
+            'events' => $events,
         ];
+    }
+
+    /**
+     * @Route("/admin/organisers/", name="user_management")
+     * @Method("GET")
+     */
+    public function organiserIndex(): array
+    {
+        try {
+            $organisers = $this->getDoctrine()->getRepository('App:Organiser')->findAll();
+        } catch (\Exception $e) {
+            $this->generateStorageFault();
+        }
+
+
+        return [
+            'title'      => 'Organisers',
+            'organisers' => isset($organisers) ? $organisers : null,
+        ];
+    }
+
+    /**
+     * @Route("/admin/organiser/add", name="user_add")
+     * @Template(":admin:organiser_index.html.twig")
+     * @Method("GET")
+     */
+    public function organiserAdd(): array
+    {
+        $organiser = new Organiser();
+        $organiser->setDisplayName('jez');
+        $organiser->setEmail('jez@hiohzo.com');
+        $organiser->setRole('ADMIN');
+        $organiser->setPassword(password_hash('password', PASSWORD_BCRYPT));
+
+        $orm = $this->getDoctrine()->getManager();
+        $orm->persist($organiser);
+        $orm->flush();
+
+        return [
+            'title' => 'Users',
+            'users' => $organiser,
+        ];
+    }
+
+    private function generateStorageFault(): void
+    {
+        $session = $this->get('session');
+        $flash   = $session->getFlashBag();
+        $flash->add('error', 'Sorry we are having problems connection to the storage right now');
     }
 }

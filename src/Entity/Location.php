@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Location
  *
- * @ORM\Table(name="location")
+ * @ORM\Table(name="locations")
  * @ORM\Entity
  */
 class Location
@@ -17,7 +17,7 @@ class Location
      *
      * @ORM\Column(name="id", type="guid", nullable=false)
      * @ORM\Id
-     * @ORM\GeneratedValue(strategy="SEQUENCE")
+     * @ORM\GeneratedValue(strategy="UUID")
      * @ORM\SequenceGenerator(sequenceName="location_id_seq", allocationSize=1, initialValue=1)
      */
     private $id;

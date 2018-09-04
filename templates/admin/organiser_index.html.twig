@@ -1,0 +1,18 @@
+{% extends 'admin/base.html.twig' %}
+{% block title %}Organisers admin{% endblock %}
+{% block body %}
+    <div class="card meet f3">
+        <div class="details">
+            <div class="top">
+                <h2 class="title">{{ title | default('Dashboard') }}</h2>
+                {{ dump() }}
+                <ul>
+                    {% for organiser in organisers|default %}
+                        <li>{{ organiser.displayName }} &lt;{{ organiser.email }}&gt;</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </div>
+    {{ parent() }}
+{% endblock %}

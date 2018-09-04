@@ -5,20 +5,20 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Meetup
+ * Event
  *
- * @ORM\Table(name="meetup", indexes={@ORM\Index(name="idx_9377e2864d218e", columns={"location_id"})})
+ * @ORM\Table(name="events", indexes={@ORM\Index(name="location_index", columns={"location_id"})})
  * @ORM\Entity
  */
-class Meetup
+class Event
 {
     /**
      * @var string
      *
      * @ORM\Column(name="id", type="guid", nullable=false)
      * @ORM\Id
-     * @ORM\GeneratedValue(strategy="SEQUENCE")
-     * @ORM\SequenceGenerator(sequenceName="meetup_id_seq", allocationSize=1, initialValue=1)
+     * @ORM\GeneratedValue(strategy="UUID")
+     * @ORM\SequenceGenerator(sequenceName="event_id_seq", allocationSize=1, initialValue=1)
      */
     private $id;
 
