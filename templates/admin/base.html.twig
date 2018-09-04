@@ -1,9 +1,14 @@
 {% extends 'base.html.twig' %}
 {% block title %}Admin{% endblock %}
 {% block body %}
-    <div class="card meet f1">
-        <a class="button small" href="{{ url('member') }}">Members</a>
-        <a class="button small" href="{{ url('user_management') }}">Organisers</a>
-        <a class="button small" href="{{ url('event_management') }}">Events</a>
+    <div id="admin-container">
+        <main class="card">
+            {% block main %}{% endblock %}
+        </main>
+        <aside id="sidebar">
+            <a class="button" href="{{ url('member') }}">Members</a>
+            <a class="button" href="{{ url('user_management') }}">Organisers</a>
+            <a class="button" href="{{ url('event_management') }}">Events</a>
+        </aside>
     </div>
 {% endblock %}

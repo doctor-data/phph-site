@@ -49,6 +49,7 @@ class AdminController extends Controller
      */
     public function eventIndex(): array
     {
+        $events = null;
         try {
             $events = $this->getDoctrine()->getRepository('App:Event')->findAll();
         } catch (\Exception $e) {
@@ -81,7 +82,7 @@ class AdminController extends Controller
     }
 
     /**
-     * @Route("/admin/organiser/add", name="user_add")
+     * @Route("/admin/organiser/add", name="organiser_add")
      * @Template(":admin:organiser_index.html.twig")
      * @Method("GET")
      */
