@@ -1,0 +1,12 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block title %}Add organiser{% endblock %}
+
+{% block main %}
+    <h1>{{ title | default('Dashboard') }}</h1>
+    {% if form is defined %}
+        {{ form(form) }}
+    {% else %}
+        <p>{{ result }}</p>
+    {% endif %}
+{% endblock %}

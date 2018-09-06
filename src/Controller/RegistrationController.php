@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Event;
 use App\Entity\Member;
 use App\Form\RegistrationType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
@@ -10,6 +11,7 @@ use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
@@ -22,7 +24,7 @@ class RegistrationController extends Controller
      * @Route("/registration/{id}", name="registration")
      * @Method("GET")
      */
-    public function index($id)
+    public function index($id): Response
     {
         $formView = $this->createForm(RegistrationType::class)
                          ->add('submit', SubmitType::class)
@@ -36,7 +38,7 @@ class RegistrationController extends Controller
                              ]
                          )
                          ->add(
-                             'talk',
+                             'talk_id',
                              HiddenType::class,
                              [
                                  'attr' => [
@@ -54,13 +56,13 @@ class RegistrationController extends Controller
      * @Method("POST")
      * @param Request $request
      *
-     * @return \Symfony\Component\HttpFoundation\Response
+     * @return Response
      */
     public function register(Request $request)
     {
         $session  = $this->get('session');
         $response = $request->request->get('registration');
-
+        $event    = $this->getDoctrine()->getRepository('App:Talk')->find($response['talk_id'])->getevent();
 
         if ($response['consent'] !== '1') {
             $session->getFlashBag()->set(
@@ -71,7 +73,7 @@ class RegistrationController extends Controller
             return $this->render('registration/index.html.twig', []);
         }
 
-        if ( ! $this->registerMember($response['name'], $response['contact_info'])) {
+        if ( ! $this->registerMember($response['name'], $response['contact_info'], $event)) {
             return $this->render('registration/index.html.twig', []);
         }
 
@@ -84,13 +86,16 @@ class RegistrationController extends Controller
      * @param $name
      * @param $contact
      *
+     * @param Event $event
+     *
      * @return bool
      */
-    private function registerMember($name, $contact)
+    private function registerMember($name, $contact, Event $event): bool
     {
         $member = new Member();
         $member->setDisplayName($name);
         $member->setContact($contact);
+        $member->setEvent($event);
 
         $mgr = $this->getDoctrine()->getManager();
         try {

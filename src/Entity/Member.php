@@ -36,6 +36,37 @@ class Member
      */
     private $displayName = '';
 
+
+    /**
+     * @var Event
+     *
+     * @ORM\ManyToOne(targetEntity="Event")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="event_id", referencedColumnName="id")
+     * })
+     */
+    private $event;
+
+    /**
+     * @return Event
+     */
+    public function getEvent(): Event
+    {
+        return $this->event;
+    }
+
+    /**
+     * @param Event $event
+     *
+     * @return Member
+     */
+    public function setEvent(Event $event): Member
+    {
+        $this->event = $event;
+
+        return $this;
+    }
+
     public function getId(): ?string
     {
         return $this->id;

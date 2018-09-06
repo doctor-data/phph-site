@@ -3,9 +3,15 @@
 namespace App\Controller;
 
 use App\Entity\Organiser;
+use App\Form\AppOrganiserType;
+use Doctrine\DBAL\Exception\UniqueConstraintViolationException;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\FormBuilder;
+use Symfony\Component\Form\SubmitButton;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
@@ -20,45 +26,10 @@ class AdminController extends Controller
      * @Route("/admin/", name="admin")
      * @Method("GET")
      */
-    public function index()
+    public function index(): array
     {
-        return [];
-    }
-
-    /**
-     * @Route("/admin/member/", name="member")
-     * @Method("GET")
-     */
-    public function memberIndex()
-    {
-        try {
-            $members = $this->getDoctrine()->getRepository('App:Member')->findAll();
-        } catch (\Exception $e) {
-            $this->generateStorageFault();
-        }
-
         return [
-            'title'   => 'Members',
-            'members' => isset($members) ? $members : null,
-        ];
-    }
-
-    /**
-     * @Route("/admin/events/", name="event_management")
-     * @Method("GET")
-     */
-    public function eventIndex(): array
-    {
-        $events = null;
-        try {
-            $events = $this->getDoctrine()->getRepository('App:Event')->findAll();
-        } catch (\Exception $e) {
-            $this->generateStorageFault();
-        }
-
-        return [
-            'title'  => 'Events',
-            'events' => $events,
+            'title' => 'Admin',
         ];
     }
 
@@ -77,30 +48,56 @@ class AdminController extends Controller
 
         return [
             'title'      => 'Organisers',
-            'organisers' => isset($organisers) ? $organisers : null,
+            'organisers' => $organisers ?? null,
         ];
     }
 
     /**
      * @Route("/admin/organiser/add", name="organiser_add")
-     * @Template(":admin:organiser_index.html.twig")
+     * @Template("admin/organiser_add.html.twig")
      * @Method("GET")
      */
     public function organiserAdd(): array
     {
-        $organiser = new Organiser();
-        $organiser->setDisplayName('jez');
-        $organiser->setEmail('jez@hiohzo.com');
-        $organiser->setRole('ADMIN');
-        $organiser->setPassword(password_hash('password', PASSWORD_BCRYPT));
-
-        $orm = $this->getDoctrine()->getManager();
-        $orm->persist($organiser);
-        $orm->flush();
+        $form = $this->createForm(AppOrganiserType::class);
+        $form->add('submit', SubmitType::class);
+        $form = $form->createView();
 
         return [
             'title' => 'Users',
-            'users' => $organiser,
+            'form'  => $form,
+        ];
+    }
+
+    /**
+     * @Route("/admin/organiser/add", name="organiser_post")
+     * @Template("admin/organiser_add.html.twig")
+     * @Method("POST")
+     * @param Request $request
+     *
+     * @return array
+     */
+    public function organiserSubmit(Request $request): array
+    {
+        $data = $request->request->get('app_organiser');
+
+        $organiser = new Organiser();
+        $organiser->setDisplayName($data['displayName']);
+        $organiser->setPassword(password_hash($data['password'], PASSWORD_BCRYPT));
+        $organiser->setEmail($data['email']);
+        $organiser->setRole(serialize($data['role']));
+
+        $orm    = $this->getDoctrine()->getManager();
+        $result = 'Your organiser has been added';
+        try {
+            $orm->persist($organiser);
+            $orm->flush();
+        } catch (UniqueConstraintViolationException $e) {
+            $result = 'This organiser already exists';
+        }
+
+        return [
+            'result' => $result,
         ];
     }
 

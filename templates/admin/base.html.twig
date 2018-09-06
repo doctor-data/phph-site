@@ -3,10 +3,11 @@
 {% block body %}
     <div id="admin-container">
         <main class="card">
-            {% block main %}{% endblock %}
+            {% block main %}
+                <h1>{{ title | default('Dashboard') }}</h1>
+            {% endblock %}
         </main>
         <aside id="sidebar">
-            <a class="button" href="{{ url('member') }}">Members</a>
             <a class="button" href="{{ url('user_management') }}">Organisers</a>
             <a class="button" href="{{ url('event_management') }}">Events</a>
         </aside>

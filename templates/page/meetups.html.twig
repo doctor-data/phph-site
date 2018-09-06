@@ -7,7 +7,7 @@
         {{ flashMessage }}
     {% endfor %}
     {% for talk in talks %}
-        {% if date(talk.meetup.fromDate) > date() and talk.speaker is not null and single is null %}
+        {% if date(talk.event.fromDate) >= date() and talk.speaker is not null and single is null %}
             <div class="card meet">
                 <div class="image"><img
                             src="{{ asset('build/images/meet-holding.jpeg') }}"

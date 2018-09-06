@@ -4,6 +4,9 @@ Auth:
 Admin:
     resource: ../../src/Controller/AdminController.php
     type: annotation
+Admin_Event:
+    resource: ../../src/Controller/AdminEventController.php
+    type: annotation
 Registrations:
     resource: ../../src/Controller/RegistrationController.php
     type: annotation

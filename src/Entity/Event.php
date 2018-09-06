@@ -44,7 +44,7 @@ class Event
     private $topic;
 
     /**
-     * @var \Location
+     * @var Location
      *
      * @ORM\ManyToOne(targetEntity="Location")
      * @ORM\JoinColumns({
