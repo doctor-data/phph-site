@@ -2,9 +2,22 @@
 {% block title %}Members{% endblock %}
 {% block main %}
     <h1>{{ title | default('Dashboard') }}</h1>
-    <ul>
-        {% for member in members|default %}
-            <li>{{ member.displayName }} &lt;{{ member.contact }}&gt;</li>
-        {% endfor %}
-    </ul>
+    {% if members is defined and members|length > 0 %}
+        <table>
+            <thead>
+            <tr>
+                <th>Name</th>
+                <th>Contact</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for member in members|default %}
+                <tr>
+                    <td>{{ member.displayName }}</td>
+                    <td>{{ member.contact }}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    {% endif %}
 {% endblock %}

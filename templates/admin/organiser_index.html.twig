@@ -2,12 +2,24 @@
 {% block title %}Organisers admin{% endblock %}
 {% block main %}
     <h1>{{ title | default('Dashboard') }}</h1>
+    <table>
+        <thead>
+        <tr>
+            <th>Username</th>
+            <th>Email</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for organiser in organisers|default %}
+            <tr>
+                <td>{{ organiser.displayName }}</td>
+                <td>&lt;{{ organiser.email }}&gt;</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    <br>
     <nav>
         <a href="{{ url('organiser_add') }}">Add new</a>
     </nav>
-    <ul>
-        {% for organiser in organisers|default %}
-            <li>{{ organiser.displayName }} &lt;{{ organiser.email }}&gt;</li>
-        {% endfor %}
-    </ul>
 {% endblock %}
