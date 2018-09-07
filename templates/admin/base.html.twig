@@ -8,8 +8,10 @@
             {% endblock %}
         </main>
         <aside id="sidebar">
+            <span class="button">Welcome {{ app.user.displayName }}</span>
             <a class="button" href="{{ url('user_management') }}">Organisers</a>
             <a class="button" href="{{ url('event_management') }}">Events</a>
+            <a class="button" href="{{ url('logout') }}">Log out</a>
         </aside>
     </div>
 {% endblock %}

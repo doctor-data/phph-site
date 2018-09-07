@@ -1,13 +1,5 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: jez
- * Date: 05/08/2018
- * Time: 23:17
- */
-
 namespace App\Controller;
-
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Routing\Annotation\Route;
@@ -21,9 +13,13 @@ class AuthController extends Controller
 {
     /**
      * @Route("/login", name="login")
+     * @param AuthenticationUtils $authenticationUtils
+     * @return \Symfony\Component\HttpFoundation\Response
      */
     public function login(AuthenticationUtils $authenticationUtils)
     {
+
+        dump($authenticationUtils);
 
         // get the login error if there is one
         $error = $authenticationUtils->getLastAuthenticationError();

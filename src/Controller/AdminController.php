@@ -4,13 +4,10 @@ namespace App\Controller;
 
 use App\Entity\Organiser;
 use App\Form\AppOrganiserType;
-use Doctrine\DBAL\Exception\UniqueConstraintViolationException;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
-use Symfony\Component\Form\FormBuilder;
-use Symfony\Component\Form\SubmitButton;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -89,12 +86,8 @@ class AdminController extends Controller
 
         $orm    = $this->getDoctrine()->getManager();
         $result = 'Your organiser has been added';
-        try {
-            $orm->persist($organiser);
-            $orm->flush();
-        } catch (UniqueConstraintViolationException $e) {
-            $result = 'This organiser already exists';
-        }
+        $orm->persist($organiser);
+        $orm->flush();
 
         return [
             'result' => $result,

@@ -63,12 +63,9 @@
       flex: 2;
       overflow: hidden;
       display: flex;
-      img {
-        transform: translateX(-50%);
-        margin-left: 50%;
-        max-height: 520px;
-        width: auto;
-      }
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-position: center;
       @media (max-width: 768px) {
         display: none;
       }

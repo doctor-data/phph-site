@@ -8,10 +8,13 @@
     {% endfor %}
     {% for talk in talks %}
         {% if date(talk.event.fromDate) >= date() and talk.speaker is not null and single is null %}
+            {% if (talk.speaker.imagefilename is defined) %}
+                {% set background = talk.speaker.imagefilename %}
+            {% else %}
+                {% set background = asset('build/images/meet-holding.jpeg') %}
+            {% endif %}
             <div class="card meet">
-                <div class="image"><img
-                            src="{{ asset('build/images/meet-holding.jpeg') }}"
-                            alt="@{{ talk.speaker.twitterhandle }}"></div>
+                <div class="image" style="background-image: url('{{ background }}')"></div>
                 <div class="details">
                     <div class="top">
                         <h2 class="title">{{ talk.title }}</h2>
@@ -19,7 +22,7 @@
                             <a href="https://www.twitter.com/{{ talk.speaker.twitterhandle }}"
                                target="_blank">{{ talk.speaker.fullName }}</a>
                         </h3>
-                        <p class="description">{{ talk.abstract }}</p>
+                        <p class="description">{{ talk.abstract|nl2br }}</p>
                         <p>
                             <small><strong>Event starts at {{ talk.time | date('ga \\o\\n  D jS M') }}, talk begins 30
                                     minutes later</strong></small>

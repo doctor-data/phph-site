@@ -51,8 +51,8 @@ class AppFixtures extends Fixture
         $organiser = new Organiser();
         $organiser->setDisplayName('admin');
         $organiser->setEmail('test@test.com');
-        $organiser->setPassword('admin');
-        $organiser->setRole('admin');
+        $organiser->setPassword(password_hash('admin', PASSWORD_BCRYPT));
+        $organiser->setRole(serialize('ROLE_ADMIN'));
 
         $manager->persist($organiser);
         $manager->flush();
@@ -81,7 +81,7 @@ class AppFixtures extends Fixture
     {
         // Create default meet
         $location = $manager->getRepository('App:Location')->findOneBy(['name' => 'Oasis the venue']);
-        $event    = new Event();
+        $event = new Event();
         $event->setLocation($location);
         $event->setFromDate(new \DateTime('tomorrow'));
         $event->setToDate(new \DateTime('tomorrow'));
@@ -96,15 +96,17 @@ class AppFixtures extends Fixture
     protected function createTalk(ObjectManager $manager): void
     {
         // Create default talks
-        $event   = $manager->getRepository('App:Event')->findOneBy(['topic' => 'Event']);
-        $speaker = $manager->getRepository('App:Speaker')->findOneBy(['fullName' => 'Jez Emery']);
+        $event = $manager->getRepository('App:Event')->findOneBy(['topic' => 'Event']);
+        $speaker = $manager->getRepository('App:Speaker')->findOneBy(['fullName' => 'James Titcumb']);
 
         $talk = new Talk();
-        $talk->setAbstract('lorem');
+        $talk->setAbstract('This prototype works, but it’s not pretty, and now it’s in production. That legacy application really needs some TLC. Where do we start? When creating long lived applications, it’s imperative to focus on good practices. The solution is to improve the whole development life cycle; from planning, better coding and testing, to automation, peer review and more. In this tutorial, we’ll take a deep dive into each of these areas, looking at how we can make positive, actionable change in our workflow.
+
+This workshop intends to improve your skills in planning, documenting, some aspects of development, testing and delivery of software for both legacy and greenfield projects. The workshop is made up of multiple exercises, allowing dynamic exploration into the various aspects of the software development life cycle. In each practical exercise, we\'ll brainstorm and investigate solutions, ensuring they are future-proofed, well tested and lead to the ultimate goal of confidence in delivering stable software.');
         $talk->setevent($event);
         $talk->setSpeaker($speaker);
         $talk->setTime(new \DateTime('7pm'));
-        $talk->setTitle('Talk title');
+        $talk->setTitle('Best practices for Crafting High Quality PHP Apps');
         $talk->setYoutubeId('');
 
         $manager->persist($talk);
@@ -117,10 +119,10 @@ class AppFixtures extends Fixture
     protected function createSpeaker(ObjectManager $manager)
     {
         $speaker = new Speaker();
-        $speaker->setBiography('This person talk good');
-        $speaker->setFullName('Jez Emery');
-        $speaker->setImagefilename('');
-        $speaker->setTwitterhandle('@JezEmery');
+        $speaker->setBiography('James is a consultant, trainer and developer at Roave. He is a prolific contributor to various open source projects and is a Zend Certified Engineer. He also founded the UK based PHP Hampshire user group and PHP South Coast conference.');
+        $speaker->setFullName('James Titcumb');
+        $speaker->setImagefilename('https://conference.scotlandphp.co.uk/images/speakers/titcumb.png');
+        $speaker->setTwitterhandle('@asgrim');
 
         $manager->persist($speaker);
         $manager->flush();
