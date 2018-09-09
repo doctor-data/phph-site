@@ -8,6 +8,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -68,7 +69,7 @@ class AdminController extends Controller
 
     /**
      * @Route("/admin/organiser/add", name="organiser_post")
-     * @Template("admin/organiser_add.html.twig")
+     * @Template("admin/organiser_index.html.twig")
      * @Method("POST")
      * @param Request $request
      *
@@ -92,6 +93,32 @@ class AdminController extends Controller
         return [
             'result' => $result,
         ];
+    }
+
+    /**
+     * @Route("/admin/organiser/{organiser}/delete", name="organiser_delete")
+     * @Method("GET")
+     *
+     * @param Organiser $organiser
+     *
+     * @return RedirectResponse
+     */
+    public function organiserDelete(Organiser $organiser): RedirectResponse
+    {
+
+        if ($this->getUser()->getId() === $organiser->getId()) {
+            $this->get('session')->getFlashBag()->add('error', 'Sorry you can\'t delete yourself');
+
+            return $this->redirectToRoute('user_management');
+        }
+
+        $em = $this->getDoctrine()->getManager();
+        $em->remove($organiser);
+        $em->flush();
+        $this->get('session')->getFlashBag()->add('alert', 'Organiser has been deleted');
+
+        return $this->redirectToRoute('user_management');
+
     }
 
     private function generateStorageFault(): void

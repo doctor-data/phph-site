@@ -6,7 +6,5 @@
     <h1>{{ title | default('Dashboard') }}</h1>
     {% if form is defined %}
         {{ form(form) }}
-    {% else %}
-        <p>{{ result }}</p>
     {% endif %}
 {% endblock %}

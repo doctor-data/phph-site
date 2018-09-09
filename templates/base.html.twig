@@ -3,7 +3,8 @@
 <head>
     {% block meta %}
         <meta charset="utf-8">
-        <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
+        <meta name="viewport"
+              content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi"/>
     {% endblock %}
     <title>{% block title %}{% endblock %} - PHP Hampshire</title>
     <link rel="stylesheet" href="{{ asset('build/app.css') }}">
@@ -28,10 +29,12 @@
 <main class="wrapper content">
     {% block body %}{% endblock %}
 </main>
-<div class="wrapper">
-    <a href="mailto:speak@phphants.co.uk" class="announcement">We are looking for speakers for our monthly meetups! 
-        To volunteer, <strong>please email us</strong>.</a>
-</div>
+{% block speaker_message %}
+    <div class="wrapper">
+        <a href="mailto:speak@phphants.co.uk" class="announcement">We are looking for speakers for our monthly meetups!
+            To volunteer, <strong>please email us</strong>.</a>
+    </div>
+{% endblock %}
 {% include 'footer.html.twig' %}
 {% block javascripts %}
     <script src="{{ asset('build/app.js') }}" rel="prefetch"></script>

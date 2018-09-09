@@ -1,12 +1,13 @@
 {% extends 'admin/base.html.twig' %}
 {% block title %}Organisers admin{% endblock %}
 {% block main %}
-    <h1>{{ title | default('Dashboard') }}</h1>
+    {{ parent() }}
     <table>
         <thead>
         <tr>
             <th>Username</th>
             <th>Email</th>
+            <th></th>
         </tr>
         </thead>
         <tbody>
@@ -14,12 +15,15 @@
             <tr>
                 <td>{{ organiser.displayName }}</td>
                 <td>&lt;{{ organiser.email }}&gt;</td>
+                <td><a href=""><i class="fa fa-edit"></i></a><a
+                            href="{{ url('organiser_delete', {'organiser':organiser.id}) }}"><i
+                                class="fa fa-trash-alt"></i></a></td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
     <br>
     <nav>
-        <a href="{{ url('organiser_add') }}">Add new</a>
+        <a class="button small" href="{{ url('organiser_add') }}">Add new</a>
     </nav>
 {% endblock %}

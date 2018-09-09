@@ -1,6 +1,9 @@
 #admin-container {
   display: flex;
   justify-content: space-between;
+  background: white;
+  padding: 1.3em;
+  box-shadow: 0 -1px 10px rgba(0, 0, 0, .2);
   aside {
     display: flex;
     flex-basis: 20%;
@@ -14,79 +17,28 @@
     }
     .button {
       font-size: 1em;
-      background: #FFF;
+      margin-bottom: 1px;
+      align-items: center;
+      background: #444;
       -webkit-box-shadow: none;
       -moz-box-shadow: none;
       box-shadow: none;
-      color: $burnt-sienna;
-      &:hover {
-        background: darken(#FFF, 5%);
-      }
     }
   }
   main {
-    display: flex;
-    flex-basis: 79%;
-    padding: 2em;
+    flex-basis: 78%;
     h1 {
       font-family: "Yanone Kaffeesatz", sans-serif;
       font-size: 2.3rem;
     }
   }
-  table a:link {
-    color: #666;
-    font-weight: bold;
-    text-decoration:none;
+  i {
+    width: 35px;
   }
-  table a:visited {
-    color: #999999;
-    font-weight:bold;
-    text-decoration:none;
-  }
-  table a:active,
-  table a:hover {
-    color: #bd5a35;
-    text-decoration:underline;
-  }
-  table {
-    color:#666;
-    text-shadow: 1px 1px 0px #fff;
-    background:#eaebec;
-    border:#ccc 1px solid;
-  }
-  table th {
-    padding:21px 25px 22px 25px;
-    border-top:1px solid #fafafa;
-    border-bottom:1px solid #e0e0e0;
-    background: #ededed;
-  }
-  table th:first-child {
-    text-align: left;
-    padding-left:20px;
-  }
-  table tr {
-    text-align: center;
-    padding-left:20px;
-  }
-  table td:first-child {
-    text-align: left;
-    padding-left:20px;
-    border-left: 0;
-  }
-  table td {
-    padding:18px;
-    border-top: 1px solid #ffffff;
-    border-bottom:1px solid #e0e0e0;
-    border-left: 1px solid #e0e0e0;
-    background: #fafafa;
-  }
-  table tr.even td {
-    background: #f6f6f6;
-  }
-  table tr:last-child td {
-    border-bottom:0;
-  }
-  table tr:hover td {
-    background: #f2f2f2;
+  form {
+    padding: 0;
+    div {
+      margin: 0;
+    }
   }
 }

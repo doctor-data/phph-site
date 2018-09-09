@@ -1,17 +1,29 @@
 {% extends 'base.html.twig' %}
+{% block stylesheets %}
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css"
+          integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+{% endblock %}
 {% block title %}Admin{% endblock %}
 {% block body %}
     <div id="admin-container">
-        <main class="card">
+        <main>
             {% block main %}
                 <h1>{{ title | default('Dashboard') }}</h1>
+                {% for type, messages in app.session.flashbag.all() %}
+                    {% for message in messages %}
+                        <div class="message {{ type }}">{{ message }}</div>
+                    {% endfor %}
+                {% endfor %}
             {% endblock %}
         </main>
         <aside id="sidebar">
-            <a class="button" href="{{ url('user_management') }}">{{ app.user.displayName }}</a>
-            <a class="button" href="{{ url('user_management') }}">Organisers</a>
-            <a class="button" href="{{ url('event_management') }}">Events</a>
-            <a class="button" href="{{ url('logout') }}">Log out</a>
+            <a class="button" href="{{ url('admin') }}"><i class="fas fa-user"></i>{{ app.user.displayName }}
+            </a><a class="button" href="{{ url('admin') }}"><i class="fas fa-home"></i>Admin Home
+            </a>
+            <a class="button" href="{{ url('user_management') }}"><i class="fas fa-users"></i>Organisers</a>
+            <a class="button" href="{{ url('event_management') }}"><i class="fas fa-calendar"></i>Events</a>
+            <a class="button" href="{{ url('logout') }}"><i class="fas fa-sign-out-alt"></i>Log out</a>
         </aside>
     </div>
 {% endblock %}
+{% block speaker_message %}{% endblock %}
