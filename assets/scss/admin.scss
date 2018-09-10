@@ -11,18 +11,21 @@
     justify-content: center;
     align-content: flex-start;
     flex-wrap: wrap;
+    font-size: 0.9em;
     a {
       display: flex;
       flex-basis: 100%;
     }
     .button {
       font-size: 1em;
-      margin-bottom: 1px;
       align-items: center;
       background: #444;
       -webkit-box-shadow: none;
       -moz-box-shadow: none;
       box-shadow: none;
+      &:hover {
+        background: darken(#444, 7%);
+      }
     }
   }
   main {
@@ -39,6 +42,45 @@
     padding: 0;
     div {
       margin: 0;
+    }
+  }
+  table {
+    text-align: center;
+    font-size: 0.9em;
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 0.8em;
+    thead {
+      color: white;
+      background: #444;
+      height: 45px;
+      tr {
+        th {
+          font-weight: 300;
+          padding: 0.6em 0;
+        }
+      }
+    }
+    tbody {
+      tr {
+        td {
+          padding: 0.4em 0;
+          font-size: 0.9em;
+        }
+        border-bottom: 1px solid rgb(245, 245, 245);
+        &:hover {
+          background: rgb(240, 240, 240);
+        }
+      }
+    }
+  }
+  .message {
+    color: white;
+    &.error {
+      background: #ff0033;
+    }
+    &.success {
+      background: #5CB85C;
     }
   }
 }

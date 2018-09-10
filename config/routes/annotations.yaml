@@ -10,6 +10,9 @@ Admin_Event:
 Registrations:
     resource: ../../src/Controller/RegistrationController.php
     type: annotation
+Admin_Organiser:
+    resource: ../../src/Controller/OrganiserController.php
+    type: annotation
 Pages:
     resource: ../../src/Controller/PageController.php
     type: annotation

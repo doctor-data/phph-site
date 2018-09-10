@@ -38,46 +38,6 @@ a.link-button.tiny {
     font-size: 12px;
 }
 
-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 20px;
-
-    thead {
-        td {
-            background-color: #2E2E2E;
-            color: white;
-        }
-    }
-    td, th {
-        padding: 5px 10px;
-        vertical-align: top;
-
-        &.row-label {
-            text-align: right;
-            font-weight: bold;
-        }
-        &.nowrap {
-            white-space: nowrap;
-        }
-    }
-    tr {
-        &:nth-child(odd) {
-            background-color: rgba(192, 192, 192, 0.2);
-        }
-        &.past {
-            td {
-                color: grey;
-                font-style: italic;
-
-                a.link-button.tiny {
-                    font-style: normal;
-                }
-            }
-        }
-    }
-}
-
 .video-icon-link {
     text-decoration: none;
     font-size: 30px;
