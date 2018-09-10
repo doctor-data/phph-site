@@ -26,28 +26,28 @@ class Organiser implements UserInterface, \Serializable
     /**
      * @var string
      *
-     * @ORM\Column(name="email", type="string", length=1024, nullable=false)
+     * @ORM\Column(name="email", type="string", nullable=false)
      */
     private $email;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="password", type="string", length=1024, nullable=false)
+     * @ORM\Column(name="password", type="string", nullable=false)
      */
     private $password;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="role", type="string", length=1024, nullable=false)
+     * @ORM\Column(name="role", type="string", nullable=false)
      */
     private $role;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="display_name", type="string", length=1024, nullable=false)
+     * @ORM\Column(name="display_name", type="string", nullable=false)
      */
     private $displayName;
 

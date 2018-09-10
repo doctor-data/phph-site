@@ -18,21 +18,21 @@ class Member
      * @ORM\Column(name="id", type="guid", nullable=false)
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="UUID")
-     * @ORM\SequenceGenerator(sequenceName="member_id_seq", allocationSize=1, initialValue=1)
+     * @ORM\SequenceGenerator(sequenceName="member_id_seq")
      */
     private $id;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="contact", type="string", length=1024, nullable=false, options={"default" : ""})
+     * @ORM\Column(name="contact", type="string", nullable=false, options={"default" : ""})
      */
     private $contact = '';
 
     /**
      * @var string
      *
-     * @ORM\Column(name="display_name", type="string", length=1024, nullable=false, options={"default" : ""})
+     * @ORM\Column(name="display_name", type="string", nullable=false, options={"default" : ""})
      */
     private $displayName = '';
 

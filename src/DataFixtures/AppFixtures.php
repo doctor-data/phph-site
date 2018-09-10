@@ -25,8 +25,9 @@ class AppFixtures extends Fixture
      */
     public function __construct(ObjectManager $manager)
     {
-        // ensure that UUID is available
-        $manager->getConnection()->exec('CREATE EXTENSION IF NOT EXISTS "uuid-ossp";');
+        if ($manager->getConnection()->getParams()["driver"] === 'pdo_pgsql') {
+            $manager->getConnection()->exec('CREATE EXTENSION IF NOT EXISTS "uuid-ossp";');
+        }
     }
 
     /**
