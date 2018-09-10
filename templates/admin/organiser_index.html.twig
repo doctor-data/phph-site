@@ -15,7 +15,7 @@
             <tr>
                 <td>{{ organiser.displayName }}</td>
                 <td>&lt;{{ organiser.email }}&gt;</td>
-                <td><a href=""><i class="fa fa-edit"></i></a><a
+                <td><a href="{{ url('organiser_edit', {'organiser':organiser.id}) }}"><i class="fa fa-edit"></i></a><a
                             href="{{ url('organiser_delete', {'organiser':organiser.id}) }}"><i
                                 class="fa fa-trash-alt"></i></a></td>
             </tr>

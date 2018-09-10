@@ -1,9 +1,9 @@
 #admin-container {
   display: flex;
   justify-content: space-between;
-  background: white;
-  padding: 1.3em;
-  box-shadow: 0 -1px 10px rgba(0, 0, 0, .2);
+  //background: white;
+  //padding: 1.3em;
+  //box-shadow: 0 -1px 10px rgba(0, 0, 0, .2);
   aside {
     display: flex;
     flex-basis: 20%;
@@ -50,6 +50,7 @@
     width: 100%;
     border-collapse: collapse;
     margin-top: 0.8em;
+    background: white;
     thead {
       color: white;
       background: #444;

@@ -17,10 +17,11 @@
             {% endblock %}
         </main>
         <aside id="sidebar">
-            <a class="button" href="{{ url('admin') }}"><i class="fas fa-user"></i>{{ app.user.displayName }}
+            <a class="button" href="{{ url('organiser_edit', {'organiser': app.user.id}) }}"><i
+                        class="fas fa-user"></i>{{ app.user.displayName }}
             </a><a class="button" href="{{ url('admin') }}"><i class="fas fa-home"></i>Admin Home
             </a>
-            <a class="button" href="{{ url('user_management') }}"><i class="fas fa-users"></i>Organisers</a>
+            <a class="button" href="{{ url('organisers') }}"><i class="fas fa-users"></i>Organisers</a>
             <a class="button" href="{{ url('event_management') }}"><i class="fas fa-calendar"></i>Events</a>
             <a class="button" href="{{ url('logout') }}"><i class="fas fa-sign-out-alt"></i>Log out</a>
         </aside>

@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Organiser;
 use App\Form\AppOrganiserType;
+use Doctrine\DBAL\Exception\UniqueConstraintViolationException;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -21,7 +22,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class OrganiserController extends Controller
 {
     /**
-     * @Route("/admin/organisers/", name="user_management")
+     * @Route("/admin/organisers/", name="organisers")
      * @Template("admin/organiser_index.html.twig")
      * @Method("GET")
      */
@@ -35,7 +36,7 @@ class OrganiserController extends Controller
 
 
         return [
-            'title'      => 'Organisers',
+            'title' => 'Organisers',
             'organisers' => $organisers ?? null,
         ];
     }
@@ -53,7 +54,7 @@ class OrganiserController extends Controller
 
         return [
             'title' => 'Users',
-            'form'  => $form,
+            'form' => $form,
         ];
     }
 
@@ -74,12 +75,17 @@ class OrganiserController extends Controller
         $organiser->setEmail($data['email']);
         $organiser->setRole(serialize($data['role']));
 
-        $orm = $this->getDoctrine()->getManager();
-        $this->get('session')->getFlashBag()->add('success', 'Organiser has been added');
-        $orm->persist($organiser);
-        $orm->flush();
+        try {
+            $orm = $this->getDoctrine()->getManager();
+            $orm->persist($organiser);
+            $orm->flush();
+        } catch (UniqueConstraintViolationException $e) {
+            $this->get('session')->getFlashBag()->add('error', 'Sorry, this user already exists');
+            return $this->redirectToRoute('organisers');
+        }
 
-        return $this->redirectToRoute('user_management');
+        $this->get('session')->getFlashBag()->add('success', 'Organiser has been added');
+        return $this->redirectToRoute('organisers');
     }
 
     /**
@@ -96,7 +102,7 @@ class OrganiserController extends Controller
         if ($this->getUser()->getId() === $organiser->getId()) {
             $this->get('session')->getFlashBag()->add('error', 'Sorry you can\'t delete yourself');
 
-            return $this->redirectToRoute('user_management');
+            return $this->redirectToRoute('organisers');
         }
 
         $em = $this->getDoctrine()->getManager();
@@ -104,12 +110,13 @@ class OrganiserController extends Controller
         $em->flush();
         $this->get('session')->getFlashBag()->add('success', 'Organiser has been deleted');
 
-        return $this->redirectToRoute('user_management');
+        return $this->redirectToRoute('organisers');
 
     }
 
     /**
      * @Route("/admin/organiser/{organiser}/edit", name="organiser_edit")
+     * @Template("admin/organiser_add.html.twig")
      * @Method("GET")
      *
      * @param Organiser $organiser
@@ -118,16 +125,47 @@ class OrganiserController extends Controller
      */
     public function organiserEdit(Organiser $organiser): array
     {
+        $form = $this->createForm(AppOrganiserType::class, $organiser);
+        $form->add('submit', SubmitType::class);
+        $form = $form->createView();
 
+        return [
+            'title' => 'Editing user '.$organiser->getEmail(),
+            'form' => $form
+        ];
+    }
 
+    /**
+     * @Route("/admin/organiser/{organiser}/edit", name="organiser_edit_post")
+     * @Method("POST")
+     *
+     * @param Organiser $organiser
+     *
+     * @param Request $request
+     * @return RedirectResponse
+     */
+    public function organiserEditPost(Organiser $organiser, Request $request): RedirectResponse
+    {
+        $data = $request->request->get('app_organiser');
+        $organiser->setPassword(password_hash($data['password'], PASSWORD_BCRYPT));
+        try {
+            $orm = $this->getDoctrine()->getManager();
+            $orm->merge($organiser);
+            $orm->flush();
+        } catch (UniqueConstraintViolationException $e) {
+            $this->get('session')->getFlashBag()->add('error', 'Sorry, this user already exists');
+            return $this->redirectToRoute('organisers');
+        }
 
-        return [];
+        $this->get('session')->getFlashBag()->add('success', 'Organiser has been updated');
+        return $this->redirectToRoute('organisers');
+
     }
 
     private function generateStorageFault(): void
     {
         $session = $this->get('session');
-        $flash   = $session->getFlashBag();
+        $flash = $session->getFlashBag();
         $flash->add('error', 'Sorry we are having problems connection to the storage right now');
     }
 }
