@@ -7,4 +7,7 @@
             <li><a href="{{ url('event_member_management', {'id':event.id}) }}">{{ event.fromDate|date('M Y') }}</a></li>
         {% endfor %}
     </ul>
+    <nav>
+        <a href="{{ url('event_add') }}">Add event</a>
+    </nav>
 {% endblock %}

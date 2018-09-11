@@ -3,9 +3,11 @@
 namespace App\Controller;
 
 use App\Entity\Event;
+use App\Form\EventType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Routing\Annotation\Route;
 
 class AdminEventController extends Controller
@@ -29,6 +31,24 @@ class AdminEventController extends Controller
         return [
             'title'  => 'Events',
             'events' => $events,
+        ];
+    }
+
+    /**
+     * @Route("/admin/event/add", name="event_add")
+     * @Template("admin/event_add.html.twig")
+     * @Method("GET")
+     * @return array
+     */
+    public function eventAdd(): array
+    {
+        $form = $this->createForm(EventType::class);
+        $form->add('submit', SubmitType::class);
+        $form = $form->createView();
+
+        return [
+            'title' => 'Add an event',
+            'form'  => $form,
         ];
     }
 
