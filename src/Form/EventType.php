@@ -15,9 +15,24 @@ class EventType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+
+        try {
+            $dateTimeOptions = $this->getDateTimeOptions();
+        } catch (\Exception $e) {
+            die('Date format could not be handled');
+        }
+
         $builder
-            ->add('fromDate', DateType::class)
-            ->add('toDate', DateType::class)
+            ->add(
+                'fromDate',
+                DateType::class,
+                $dateTimeOptions
+            )
+            ->add(
+                'toDate',
+                DateType::class,
+                $dateTimeOptions
+            )
             ->add('topic')
             ->add(
                 'location',
@@ -36,5 +51,25 @@ class EventType extends AbstractType
                 'data_class' => Event::class,
             ]
         );
+    }
+
+    /**
+     * @return array
+     * @throws \Exception
+     */
+    private function getDateTimeOptions(): array
+    {
+        $dateTime        = new \DateTime();
+        $dateTimeOptions = [
+            'widget' => 'single_text',
+            'years'  => [
+                $dateTime->format('Y'),
+                $dateTime->add(
+                    $yearInterval = new \DateInterval("P1Y")
+                )->format('Y'),
+            ],
+        ];
+
+        return $dateTimeOptions;
     }
 }
