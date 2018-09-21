@@ -130,7 +130,7 @@ class OrganiserController extends Controller
         $form = $form->createView();
 
         return [
-            'title' => 'Editing user '.$organiser->getEmail(),
+            'title' => 'Editing user ' . $organiser->getEmail(),
             'form' => $form
         ];
     }
@@ -148,14 +148,10 @@ class OrganiserController extends Controller
     {
         $data = $request->request->get('app_organiser');
         $organiser->setPassword(password_hash($data['password'], PASSWORD_BCRYPT));
-        try {
-            $orm = $this->getDoctrine()->getManager();
-            $orm->merge($organiser);
-            $orm->flush();
-        } catch (UniqueConstraintViolationException $e) {
-            $this->get('session')->getFlashBag()->add('error', 'Sorry, this user already exists');
-            return $this->redirectToRoute('organisers');
-        }
+
+        $orm = $this->getDoctrine()->getManager();
+        $orm->merge($organiser);
+        $orm->flush();
 
         $this->get('session')->getFlashBag()->add('success', 'Organiser has been updated');
         return $this->redirectToRoute('organisers');

@@ -8,6 +8,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -30,7 +31,7 @@ class EventController extends Controller
         }
 
         return [
-            'title'  => 'Events',
+            'title' => 'Events',
             'events' => $events,
         ];
     }
@@ -43,14 +44,48 @@ class EventController extends Controller
      */
     public function eventAdd(): array
     {
-        $form = $this->createForm(EventType::class);
-        $form->add('submit', SubmitType::class);
-        $form = $form->createView();
-
         return [
             'title' => 'Add an event',
-            'form'  => $form,
+            'form' => $this->createForm(EventType::class)->createView(),
         ];
+    }
+
+    /**
+     * @Route("/admin/event/{id}/edit", name="event_edit")
+     * @Template("admin/event_add.html.twig")
+     * @Method("GET")
+     * @param Event $id
+     * @return array
+     */
+    public function eventEdit(Event $id): array
+    {
+        return [
+            'title' => 'Edit an event',
+            'form' => $this->createForm(EventType::class, $id)->createView(),
+        ];
+    }
+
+    /**
+     * @Route("/admin/event/{id}/edit", name="event_edit_post")
+     * @Method("POST")
+     * @param Request $request
+     * @param Event $id
+     * @return RedirectResponse
+     */
+    public function eventEditPost(Request $request, Event $id): RedirectResponse
+    {
+        $em = $this->getDoctrine()->getManager();
+        $form = $this->createForm(EventType::class, $id);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $em->flush();
+
+            $session = $this->get('session');
+            $flash = $session->getFlashBag();
+            $flash->add('success', 'Your changes have been saved');
+        }
+        return $this->redirectToRoute('event_management');
     }
 
     /**
@@ -63,9 +98,9 @@ class EventController extends Controller
      */
     public function eventAddPost(Request $request): array
     {
-        $data     = $request->request->all()['event'];
-        $om       = $this->getDoctrine()->getManager();
-        $event    = new Event();
+        $data = $request->request->all()['event'];
+        $om = $this->getDoctrine()->getManager();
+        $event = new Event();
         $location = $om->getRepository('App:Location')->find($data['location']);
         $event->setLocation($location);
         $event->setDate(new \DateTime($data['date']));
@@ -79,19 +114,20 @@ class EventController extends Controller
      * @Route("/admin/event/{id}/members", name="event_member_management")
      * @Template("admin/member_index.html.twig")
      * @Method("GET")
+     * @param Event $id
+     * @return array
      */
-    public function eventMemberIndex($id): array
+    public function eventMemberIndex(Event $id): array
     {
         $events = null;
         try {
-            $event   = $this->getDoctrine()->getManager()->find('App:Event', $id);
-            $members = $this->getDoctrine()->getRepository('App:Member')->findBy(['event' => $event]);
+            $members = $this->getDoctrine()->getRepository('App:Member')->findBy(['event' => $id]);
         } catch (\Exception $e) {
             $this->generateStorageFault();
         }
 
         return [
-            'title'   => 'Members attending in '.$event->getDate()->format('M-Y'),
+            'title' => 'Members attending in ' . $id->getDate()->format('M Y'),
             'members' => $members,
         ];
     }
@@ -100,7 +136,7 @@ class EventController extends Controller
     private function generateStorageFault(): void
     {
         $session = $this->get('session');
-        $flash   = $session->getFlashBag();
+        $flash = $session->getFlashBag();
         $flash->add('error', 'Sorry we are having problems connection to the storage right now');
     }
 

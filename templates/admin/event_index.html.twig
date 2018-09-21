@@ -1,17 +1,21 @@
 {% extends 'admin/base.html.twig' %}
 {% block title %}Organisers admin{% endblock %}
 {% block main %}
-    <h1>{{ title | default('Dashboard') }}</h1>
+    {{ parent() }}
     <table>
         <thead>
         <tr>
             <th>Date</th>
+            <th></th>
         </tr>
         </thead>
         <tbody>
         {% for event in events|default %}
             <tr>
-                <td><a href="{{ url('event_member_management', {'id':event.id}) }}">{{ event.date|date('M Y') }}</a>
+                <td><a href="{{ url('event_member_management', {'id':event.id}) }}">{{ event.date|date('j\\<\\s\\u\\p\\>S\\<\\/\\s\\u\\p\\> F Y')|raw }}</a></td>
+                <td>
+                    <a href="{{ url('event_member_management', {'id':event.id}) }}"><i class="fa fa-users"></i></a>
+                    <a href="{{ url('event_edit', {'id':event.id}) }}"><i class="fa fa-edit"></i></a>
                 </td>
             </tr>
         {% endfor %}

@@ -1,7 +1,7 @@
 {% extends 'admin/base.html.twig' %}
 {% block title %}Members{% endblock %}
 {% block main %}
-    <h1>{{ title | default('Dashboard') }}</h1>
+    {{ parent() }}
     {% if members is defined and members|length > 0 %}
         <table>
             <thead>

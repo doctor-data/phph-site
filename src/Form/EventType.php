@@ -3,9 +3,11 @@
 namespace App\Form;
 
 use App\Entity\Event;
+use App\Entity\Location;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -38,10 +40,15 @@ class EventType extends AbstractType
                 'location',
                 EntityType::class,
                 [
-                    'class'        => Event::class,
-                    'choice_label' => 'location.name',
+                    'class' => Location::class,
+                    'choice_label' => 'name',
                 ]
+            )
+            ->add(
+                'submit',
+                SubmitType::class
             );
+
     }
 
     /**
@@ -62,10 +69,10 @@ class EventType extends AbstractType
      */
     private function getDateTimeOptions(): array
     {
-        $dateTime        = new \DateTime();
+        $dateTime = new \DateTime();
         $dateTimeOptions = [
             'widget' => 'single_text',
-            'years'  => [
+            'years' => [
                 $dateTime->format('Y'),
                 $dateTime->add(
                     $yearInterval = new \DateInterval('P1Y')
