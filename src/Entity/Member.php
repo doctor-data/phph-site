@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * User
  *
- * @ORM\Table(name="members", uniqueConstraints={@ORM\UniqueConstraint(name="contact", columns={"contact"})})
+ * @ORM\Table(name="members", uniqueConstraints={@ORM\UniqueConstraint(name="email", columns={"email"})})
  * @ORM\Entity
  */
 class Member
@@ -25,9 +25,9 @@ class Member
     /**
      * @var string
      *
-     * @ORM\Column(name="contact", type="string", nullable=false, options={"default" : ""})
+     * @ORM\Column(name="email", type="string", nullable=false, options={"default" : ""})
      */
-    private $contact = '';
+    private $email = '';
 
     /**
      * @var string
@@ -84,14 +84,22 @@ class Member
         return $this;
     }
 
-    public function getContact(): ?string
+    /**
+     * @return string
+     */
+    public function getEmail(): string
     {
-        return $this->contact;
+        return $this->email;
     }
 
-    public function setContact(string $contact): self
+    /**
+     * @param string $email
+     *
+     * @return Member
+     */
+    public function setEmail(string $email): Member
     {
-        $this->contact = $contact;
+        $this->email = $email;
 
         return $this;
     }

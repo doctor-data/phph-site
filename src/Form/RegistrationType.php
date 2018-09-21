@@ -3,6 +3,7 @@
 namespace App\Form;
 
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\FormBuilderInterface;
 
 class RegistrationType extends AbstractType
@@ -11,6 +12,6 @@ class RegistrationType extends AbstractType
     {
         $builder
             ->add('name')
-            ->add('contact_info');
+            ->add('email', EmailType::class);
     }
 }

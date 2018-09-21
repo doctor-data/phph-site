@@ -5,7 +5,7 @@ Admin:
     resource: ../../src/Controller/AdminController.php
     type: annotation
 Admin_Event:
-    resource: ../../src/Controller/AdminEventController.php
+    resource: ../../src/Controller/EventController.php
     type: annotation
 Registrations:
     resource: ../../src/Controller/RegistrationController.php

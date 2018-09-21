@@ -14,7 +14,7 @@
             {% for member in members|default %}
                 <tr>
                     <td>{{ member.displayName }}</td>
-                    <td>{{ member.contact }}</td>
+                    <td><a href="mailto:{{ member.email }}">{{ member.email }}</a></td>
                 </tr>
             {% endfor %}
             </tbody>

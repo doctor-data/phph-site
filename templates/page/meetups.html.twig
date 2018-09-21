@@ -7,7 +7,7 @@
         {{ flashMessage }}
     {% endfor %}
     {% for talk in talks %}
-        {% if date(talk.event.fromDate) >= date() and talk.speaker is not null and single is null %}
+        {% if date(talk.event.date) >= date() and talk.speaker is not null and single is null %}
             {% if (talk.speaker.imagefilename is defined) %}
                 {% set background = talk.speaker.imagefilename %}
             {% else %}

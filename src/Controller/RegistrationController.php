@@ -73,7 +73,7 @@ class RegistrationController extends Controller
             return $this->render('registration/index.html.twig', []);
         }
 
-        if ( ! $this->registerMember($response['name'], $response['contact_info'], $event)) {
+        if ( ! $this->registerMember($response['name'], $response['email'], $event)) {
             return $this->render('registration/index.html.twig', []);
         }
 
@@ -84,17 +84,17 @@ class RegistrationController extends Controller
 
     /**
      * @param $name
-     * @param $contact
+     * @param $email
      *
      * @param Event $event
      *
      * @return bool
      */
-    private function registerMember($name, $contact, Event $event): bool
+    private function registerMember($name, $email, Event $event): bool
     {
         $member = new Member();
         $member->setDisplayName($name);
-        $member->setContact($contact);
+        $member->setEmail($email);
         $member->setEvent($event);
 
         $mgr = $this->getDoctrine()->getManager();

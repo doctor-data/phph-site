@@ -3,17 +3,23 @@
 namespace App\Form;
 
 use App\Entity\Event;
-use Doctrine\ORM\EntityRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
+/**
+ * Class EventType
+ * @package App\Form
+ */
 class EventType extends AbstractType
 {
-    public function buildForm(FormBuilderInterface $builder, array $options)
+    /**
+     * @param FormBuilderInterface $builder
+     * @param array $options
+     */
+    public function buildForm(FormBuilderInterface $builder, array $options): void
     {
 
         try {
@@ -24,16 +30,10 @@ class EventType extends AbstractType
 
         $builder
             ->add(
-                'fromDate',
+                'date',
                 DateType::class,
                 $dateTimeOptions
             )
-            ->add(
-                'toDate',
-                DateType::class,
-                $dateTimeOptions
-            )
-            ->add('topic')
             ->add(
                 'location',
                 EntityType::class,
@@ -44,7 +44,10 @@ class EventType extends AbstractType
             );
     }
 
-    public function configureOptions(OptionsResolver $resolver)
+    /**
+     * @param OptionsResolver $resolver
+     */
+    public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults(
             [
@@ -65,7 +68,7 @@ class EventType extends AbstractType
             'years'  => [
                 $dateTime->format('Y'),
                 $dateTime->add(
-                    $yearInterval = new \DateInterval("P1Y")
+                    $yearInterval = new \DateInterval('P1Y')
                 )->format('Y'),
             ],
         ];

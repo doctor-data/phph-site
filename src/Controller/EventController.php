@@ -8,9 +8,10 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
-class AdminEventController extends Controller
+class EventController extends Controller
 {
 
     /**
@@ -53,6 +54,28 @@ class AdminEventController extends Controller
     }
 
     /**
+     * @Route("/admin/event/add", name="event_add_post")
+     * @Template("admin/event_index.html.twig")
+     * @Method("POST")
+     * @param Request $request
+     *
+     * @return array
+     */
+    public function eventAddPost(Request $request): array
+    {
+        $data     = $request->request->all()['event'];
+        $om       = $this->getDoctrine()->getManager();
+        $event    = new Event();
+        $location = $om->getRepository('App:Location')->find($data['location']);
+        $event->setLocation($location);
+        $event->setDate(new \DateTime($data['date']));
+        $om->persist($event);
+        $om->flush();
+
+        return [];
+    }
+
+    /**
      * @Route("/admin/event/{id}/members", name="event_member_management")
      * @Template("admin/member_index.html.twig")
      * @Method("GET")
@@ -68,7 +91,7 @@ class AdminEventController extends Controller
         }
 
         return [
-            'title'   => 'Members attending in '.$event->getFromDate()->format('M-Y'),
+            'title'   => 'Members attending in '.$event->getDate()->format('M-Y'),
             'members' => $members,
         ];
     }

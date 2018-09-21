@@ -25,23 +25,29 @@ class Event
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="from_date", type="datetime", nullable=false)
+     * @ORM\Column(name="date", type="datetime", nullable=false)
      */
-    private $fromDate;
+    private $date;
 
     /**
-     * @var \DateTime
-     *
-     * @ORM\Column(name="to_date", type="datetime", nullable=false)
+     * @return \DateTime
      */
-    private $toDate;
+    public function getDate(): \DateTime
+    {
+        return $this->date;
+    }
 
     /**
-     * @var string|null
+     * @param \DateTime $date
      *
-     * @ORM\Column(name="topic", type="string", length=1024, nullable=true)
+     * @return Event
      */
-    private $topic;
+    public function setDate(\DateTime $date): Event
+    {
+        $this->date = $date;
+
+        return $this;
+    }
 
     /**
      * @var Location
@@ -56,42 +62,6 @@ class Event
     public function getId(): ?string
     {
         return $this->id;
-    }
-
-    public function getFromDate(): ?\DateTimeInterface
-    {
-        return $this->fromDate;
-    }
-
-    public function setFromDate(\DateTimeInterface $fromDate): self
-    {
-        $this->fromDate = $fromDate;
-
-        return $this;
-    }
-
-    public function getToDate(): ?\DateTimeInterface
-    {
-        return $this->toDate;
-    }
-
-    public function setToDate(\DateTimeInterface $toDate): self
-    {
-        $this->toDate = $toDate;
-
-        return $this;
-    }
-
-    public function getTopic(): ?string
-    {
-        return $this->topic;
-    }
-
-    public function setTopic(?string $topic): self
-    {
-        $this->topic = $topic;
-
-        return $this;
     }
 
     public function getLocation(): ?Location

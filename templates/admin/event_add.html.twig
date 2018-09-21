@@ -2,5 +2,7 @@
 {% block title %}Add event{% endblock %}
 {% block main %}
     {{ parent() }}
-    {{ form(form) }}
+    {% if form is defined %}
+        {{ form(form) }}
+    {% endif %}
 {% endblock %}
