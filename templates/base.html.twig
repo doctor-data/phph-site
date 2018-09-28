@@ -26,15 +26,13 @@
     {% include 'header.html.twig' %}
     {% block hero %} {% endblock %}
 </div>
+{% block speaker_message %}
+    <a href="mailto:speak@phphants.co.uk" class="announcement">We are looking for speakers for our monthly meetups! To
+        volunteer, <strong>please email us</strong>.</a>
+{% endblock %}
 <main class="wrapper content">
     {% block body %}{% endblock %}
 </main>
-{% block speaker_message %}
-    <div class="wrapper">
-        <a href="mailto:speak@phphants.co.uk" class="announcement">We are looking for speakers for our monthly meetups!
-            To volunteer, <strong>please email us</strong>.</a>
-    </div>
-{% endblock %}
 {% include 'footer.html.twig' %}
 {% block javascripts %}
     <script src="{{ asset('build/app.js') }}" rel="prefetch"></script>

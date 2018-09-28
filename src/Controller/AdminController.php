@@ -9,16 +9,10 @@ use Symfony\Component\Routing\Annotation\Route;
 
 /**
  * Class AdminController
- * @Method("GET")
- * @Template()
  * @package App\Controller
  */
 class AdminController extends Controller
 {
-    /**
-     * @Route("/admin/", name="admin")
-     * @Method("GET")
-     */
     public function index(): array
     {
         return [

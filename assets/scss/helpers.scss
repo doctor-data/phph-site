@@ -73,46 +73,6 @@
   float: left;
 }
 
-.flex {
-  display: flex;
-  flex-direction: row;
-  @for $i from 1 through 12 {
-    .f#{$i} {
-      flex: #{$i};
-      padding: 1rem;
-      @media (max-width: 800px) {
-        flex-basis: 50%;
-        width: 50%;
-      }
-      @media (max-width: 768px) {
-        flex-basis: 96%;
-        width: 96%;
-        margin: auto
-      }
-    }
-  }
-  @media (max-width: 768px) {
-    flex-direction: column;
-  }
-}
-
-.start {
-  align-self: flex-start;
-}
-
-.end {
-  align-self: flex-end;
-}
-
-@for $i from 1 through 4 {
-  .top-margin-#{$i} {
-    margin-top: #{$i}em;
-    @media (max-width: 800px) {
-      margin-top: calc(#{$i}em / 5);
-    }
-  }
-}
-
 .message {
   display: flex;
   width: 100%;

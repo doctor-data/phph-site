@@ -1,18 +1,17 @@
-Auth:
-    resource: ../../src/Controller/AuthController.php
-    type: annotation
-Admin:
-    resource: ../../src/Controller/AdminController.php
-    type: annotation
-Admin_Event:
-    resource: ../../src/Controller/EventController.php
-    type: annotation
-Registrations:
-    resource: ../../src/Controller/RegistrationController.php
-    type: annotation
-Admin_Organiser:
-    resource: ../../src/Controller/OrganiserController.php
-    type: annotation
-Pages:
-    resource: ../../src/Controller/PageController.php
-    type: annotation
+auth_login:
+  controller: App\Controller\AuthController::login
+  path: /login
+
+admin:
+  controller: App\Controller\AdminController::index
+  path: /admin/
+
+events:
+  controller: App\Controller\EventController::index
+  path: /events/
+
+page:
+  controller: App\Controller\PageController::default
+  path: /{slug}
+  defaults:
+    slug: /

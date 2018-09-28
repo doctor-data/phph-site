@@ -12,14 +12,11 @@ use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 class AuthController extends Controller
 {
     /**
-     * @Route("/login", name="login")
      * @param AuthenticationUtils $authenticationUtils
      * @return \Symfony\Component\HttpFoundation\Response
      */
     public function login(AuthenticationUtils $authenticationUtils)
     {
-
-        dump($authenticationUtils);
 
         // get the login error if there is one
         $error = $authenticationUtils->getLastAuthenticationError();

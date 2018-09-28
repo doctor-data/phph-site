@@ -3,8 +3,6 @@
 namespace App\Controller;
 
 use App\Entity\Talk;
-use App\Repository\TalkRepository;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -14,8 +12,6 @@ class PageController extends Controller
 {
 
     /**
-     * @Route("/videos", name="videos")
-     * @Method("GET")
      * @return Response
      */
     public function videos()
@@ -23,12 +19,12 @@ class PageController extends Controller
         $videos = null;
         try {
             $repo = $this->getDoctrine()->getRepository('App:Talk');
-            $qb   = $repo->createQueryBuilder('a');
+            $qb = $repo->createQueryBuilder('a');
             $qb->where($qb->expr()->not($qb->expr()->eq('a.youtubeId', '?1')));
             $qb->setParameter(1, '');
 
             $videos = $qb->getQuery()
-                         ->getResult();
+                ->getResult();
         } catch (\Exception $e) {
             $session = $this->get('session');
             $session->getFlashBag()->add(
@@ -40,21 +36,19 @@ class PageController extends Controller
         return $this->render(
             'page/videos.html.twig',
             [
-                'talksWithVidoes' => $videos,
+                'talksWithVideos' => $videos,
             ]
         );
     }
 
     /**
-     * @Route("/meetups", name="meetups")
-     * @Method("GET")
      * @return Response
      */
-    public function meetups()
+    public function events()
     {
         $talks = null;
         try {
-            $repo  = $this->getDoctrine()->getRepository(Talk::class);
+            $repo = $this->getDoctrine()->getRepository(Talk::class);
             $talks = $repo->getUpcomingTalks();
         } catch (\Exception $e) {
 
@@ -67,7 +61,7 @@ class PageController extends Controller
         }
 
         return $this->render(
-            'page/meetups.html.twig',
+            'events.html.twig',
             [
                 'talks' => $talks,
             ]
@@ -75,8 +69,6 @@ class PageController extends Controller
     }
 
     /**
-     * @Route("{slug}", name="page")
-     * @Method("GET")
      * @param $slug
      *
      * @return Response
@@ -88,9 +80,9 @@ class PageController extends Controller
             $slug = $slug === '/' ? 'index' : $slug;
 
             return $this->render("page/$slug.html.twig");
-        } catch (\Exception $ex) {
+        } catch (NotFoundHttpException $ex) {
 
-            $message = 'This page does not exist'.PHP_EOL;
+            $message = 'This page does not exist' . PHP_EOL;
             if ($this->container->get('kernel')->getEnvironment() === 'dev') {
                 $message .= $ex->getMessage();
             }

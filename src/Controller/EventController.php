@@ -9,17 +9,12 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 class EventController extends Controller
 {
-
-    /**
-     * @Route("/admin/events/", name="event_management")
-     * @Template("admin/event_index.html.twig")
-     * @Method("GET")
-     */
-    public function eventIndex(): array
+    public function index(): Response
     {
         $events = null;
         try {
@@ -29,10 +24,10 @@ class EventController extends Controller
             $this->generateStorageFault();
         }
 
-        return [
-            'title'  => 'Events',
+        return $this->render('admin/event_index.html.twig', [
+            'title' => 'Events',
             'events' => $events,
-        ];
+        ]);
     }
 
     /**
@@ -41,11 +36,11 @@ class EventController extends Controller
      * @Method("GET")
      * @return array
      */
-    public function eventAdd(): array
+    public function add(): array
     {
         return [
             'title' => 'Add an event',
-            'form'  => $this->createForm(EventType::class)->createView(),
+            'form' => $this->createForm(EventType::class)->createView(),
         ];
     }
 
@@ -57,25 +52,23 @@ class EventController extends Controller
      *
      * @return array
      */
-    public function eventEdit(Event $id): array
+    public function edit(Event $id): array
     {
         return [
             'title' => 'Edit an event',
-            'form'  => $this->createForm(EventType::class, $id)->createView(),
+            'form' => $this->createForm(EventType::class, $id)->createView(),
         ];
     }
 
     /**
-     * @Route("/admin/event/{id}/edit", name="event_edit_post")
-     * @Method("POST")
      * @param Request $request
      * @param Event $id
      *
      * @return RedirectResponse
      */
-    public function eventEditPost(Request $request, Event $id): RedirectResponse
+    public function editPost(Request $request, Event $id): RedirectResponse
     {
-        $em   = $this->getDoctrine()->getManager();
+        $em = $this->getDoctrine()->getManager();
         $form = $this->createForm(EventType::class, $id);
         $form->handleRequest($request);
 
@@ -83,7 +76,7 @@ class EventController extends Controller
             $em->flush();
 
             $session = $this->get('session');
-            $flash   = $session->getFlashBag();
+            $flash = $session->getFlashBag();
             $flash->add('success', 'Your changes have been saved');
         }
 
@@ -97,11 +90,11 @@ class EventController extends Controller
      *
      * @return array
      */
-    public function eventAddPost(Request $request): RedirectResponse
+    public function addPost(Request $request): RedirectResponse
     {
-        $data     = $request->request->all()['event'];
-        $om       = $this->getDoctrine()->getManager();
-        $event    = new Event();
+        $data = $request->request->all()['event'];
+        $om = $this->getDoctrine()->getManager();
+        $event = new Event();
         $location = $om->getRepository('App:Location')->find($data['location']);
         $event->setLocation($location);
         $event->setDate(new \DateTime($data['date']));
@@ -110,11 +103,11 @@ class EventController extends Controller
             $om->persist($event);
             $om->flush();
             $session = $this->get('session');
-            $flash   = $session->getFlashBag();
+            $flash = $session->getFlashBag();
             $flash->add('success', 'Your changes have been saved');
         } catch (\Exception $e) {
             $session = $this->get('session');
-            $flash   = $session->getFlashBag();
+            $flash = $session->getFlashBag();
             $flash->add('error', 'There was a problem saving your changes');
             $this->get('logger')->addError($e->getMessage());
         }
@@ -140,7 +133,7 @@ class EventController extends Controller
         }
 
         return [
-            'title'   => 'Members attending in '.$id->getDate()->format('M Y'),
+            'title' => 'Members attending in ' . $id->getDate()->format('M Y'),
             'members' => $members,
         ];
     }
@@ -149,7 +142,7 @@ class EventController extends Controller
     private function generateStorageFault(): void
     {
         $session = $this->get('session');
-        $flash   = $session->getFlashBag();
+        $flash = $session->getFlashBag();
         $flash->add('error', 'Sorry we are having problems connection to the storage right now');
     }
 
