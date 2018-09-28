@@ -8,7 +8,7 @@ require('../images/jetbrains.svg');
 require('../images/strawberrysoup.svg');
 require('../images/spectrum-it.png');
 require('../images/oreilly-ug.gif');
-require('../images/meet-holding.jpeg');
+require('../images/fallback.jpg');
 
 require('../scss/app.scss');
 require('./menu.js');

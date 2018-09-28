@@ -9,9 +9,9 @@
     {% for talk in talks %}
         {% if date(talk.event.date) >= date() and talk.speaker is not null and single is null %}
             {% if (talk.speaker.imagefilename is defined) %}
-                {% set background = talk.speaker.imagefilename %}
+                {% set background = asset('build/images/'~talk.speaker.imagefilename) %}
             {% else %}
-                {% set background = asset('build/images/meet-holding.jpeg') %}
+                {% set background = asset('build/images/fallback.jpg') %}
             {% endif %}
             <div class="card meet">
                 <div class="image" style="background-image: url('{{ background }}')"></div>

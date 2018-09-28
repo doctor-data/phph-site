@@ -1,0 +1,67 @@
+
+.hero {
+  padding-bottom: 25px;
+  text-align: center;
+}
+
+@media (max-width: 600px) {
+  .hero {
+    font-size: .75em;
+  }
+}
+
+.hero h1 {
+  font-family: $fancy-heading;
+  font-size: 4em;
+  color: #ededf5;
+  text-shadow: 0 3px 0 rgba(0, 0, 0, .15);
+  font-weight: bold;
+}
+
+.hero p {
+  width: 85%;
+  margin: 0 auto;
+  padding: 1em;
+  line-height: 1.25;
+  font-size: 1.5em;
+  color: #ededf5;
+  text-shadow: 0 2px 0 rgba(0, 0, 0, .15);
+}
+
+@media (max-width: 600px) {
+  .hero p {
+    width: 100%;
+  }
+}
+
+.hero .register-button {
+  display: block;
+  width: 60%;
+  margin: 0 auto;
+  padding: .75em .5em;
+  font-size: 1.5em;
+  text-decoration: none;
+  color: #fff;
+  @include gradient($burnt-sienna);
+  border-radius: 5px;
+  box-shadow: 0 3px 0 rgba(0, 0, 0, .15);
+  -webkit-transition: all .05s;
+  transition: all .05s;
+}
+
+@media (max-width: 600px) {
+  .hero .register-button {
+    width: 80%;
+  }
+}
+
+.hero .register-button::after {
+  content: ' »';
+}
+
+.hero .register-button:hover {
+  box-shadow: none;
+  -webkit-transform: translateY(3px);
+  transform: translateY(3px);
+  cursor: pointer;
+}

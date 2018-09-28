@@ -124,7 +124,7 @@ This workshop intends to improve your skills in planning, documenting, some aspe
             'James is a consultant, trainer and developer at Roave. He is a prolific contributor to various open source projects and is a Zend Certified Engineer. He also founded the UK based PHP Hampshire user group and PHP South Coast conference.'
         );
         $speaker->setFullName('James Titcumb');
-        $speaker->setImagefilename('https://conference.scotlandphp.co.uk/images/speakers/titcumb.png');
+        $speaker->setImagefilename('fallback.jpg');
         $speaker->setTwitterhandle('@asgrim');
 
         $manager->persist($speaker);

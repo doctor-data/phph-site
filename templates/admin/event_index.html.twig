@@ -12,10 +12,13 @@
         <tbody>
         {% for event in events|default %}
             <tr>
-                <td><a href="{{ url('event_member_management', {'id':event.id}) }}">{{ event.date|date('j\\<\\s\\u\\p\\>S\\<\\/\\s\\u\\p\\> F Y')|raw }}</a></td>
                 <td>
-                    <a href="{{ url('event_member_management', {'id':event.id}) }}"><i class="fa fa-users"></i></a>
-                    <a href="{{ url('event_edit', {'id':event.id}) }}"><i class="fa fa-edit"></i></a>
+                    <a href="{{ url('event_member_management', {'id':event.id}) }}">{{ event.date|date('j\\<\\s\\u\\p\\>S\\<\\/\\s\\u\\p\\> F Y')|raw }}</a>
+                </td>
+                <td>
+                    <a href="{{ url('event_member_management', {'id':event.id}) }}"><i class="fa fa-users"
+                                                                                       title="Attendees"></i></a>
+                    <a href="{{ url('event_edit', {'id':event.id}) }}"><i class="fa fa-edit" title="Edit"></i></a>
                 </td>
             </tr>
         {% endfor %}

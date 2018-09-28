@@ -4,7 +4,6 @@
   url('../fonts/yanonekaffeesatz-regular-webfont.woff') format('woff');
   font-weight: normal;
   font-style: normal;
-
 }
 @font-face {
   font-family: 'Open Sans Italic';
@@ -12,13 +11,18 @@
   url('../fonts/opensans-italic-webfont.woff') format('woff');
   font-weight: normal;
   font-style: normal;
-
 }
 @font-face {
   font-family: 'Open Sans';
   src: url('../fonts/opensans-regular-webfont.woff2') format('woff2'),
   url('../fonts/opensans-regular-webfont.woff') format('woff');
   font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Proza';
+  src: url('../fonts/ProzaLibre-SemiBold.ttf') format('ttf');
+  font-weight: 600;
   font-style: normal;
 }
 @font-face {
@@ -31,3 +35,4 @@
 
 $fancy-heading: 'Yanone Kaffeesatz', sans-serif;
 $base-font: "Open Sans", sans-serif;
+$heading: "Proza", sans-serif;
